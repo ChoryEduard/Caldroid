@@ -3,7 +3,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/orange"
-        >
+                android:background="@color/orange">
+    <ImageView
+            android:id="@+id/imgCalItem"
+            android:background="@color/orange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/tvDateCalItem"
+            android:textSize="@dimen/text_size_date"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginRight="@dimen/item_text_marge_right"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

@@ -2,4 +2,6 @@
 <resources>
     <color name="light_background">#44383838</color>
     <color name="orange">#ff8810</color>
+    <color name="white">#77ffffff</color>
+
 </resources>

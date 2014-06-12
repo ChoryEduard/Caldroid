@@ -15,7 +15,7 @@ import android.widget.GridView;
  */
 
 public class CalendroidView extends GridView {
-    private final static int GRID_PADDING = 7;
+    private final static int GRID_PADDING = 2;
     private final static int NUM_OF_COLUMNS = 7;
 
 
@@ -48,7 +48,7 @@ public class CalendroidView extends GridView {
         this.setNumColumns(NUM_OF_COLUMNS);
         this.setColumnWidth(mColumnWidth);
         this.setStretchMode(GridView.NO_STRETCH);
-        this.setPadding((int)(padding), (int) padding, (int) padding,(int) padding);
+        this.setPadding((int)(padding), (int) padding, (int) padding,0);
         this.setHorizontalSpacing((int) padding);
         this.setVerticalSpacing((int) padding);
     }
