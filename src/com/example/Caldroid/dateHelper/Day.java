@@ -6,7 +6,7 @@ import android.text.format.Time;
  * Created by BruSD on 6/12/2014.
  */
 public class Day {
-    private Time date = new Time();;
+    private static Time date = new Time();;
     public String imgURL;
     public int Day;
     public int Month; // 0-11
@@ -19,5 +19,9 @@ public class Day {
         this.Day = date.monthDay;
         this.Month =  date.month;
         this.Year = date.year;
+    }
+
+    public int getWeekDay(){
+        return date.weekDay;
     }
 }
