@@ -43,12 +43,10 @@ public class CalendarGenerator  {
 
         for (int i = 1; i <= monthDay; i++){
 
-
-
             today.set(i, month, year);
             Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)]);
-
-            String printString = String.valueOf(day.Day) +" "+String.valueOf(day.Month)+" "+String.valueOf(day.Year) + day.imgURL;
+            day.getWeekDay();
+            String printString = String.valueOf(day.Day) +" "+String.valueOf(day.Month)+" "+String.valueOf(day.Year) + " "  + String.valueOf(day.getWeekDay());
                     Log.v(TAG , printString );
 
             currentCalendarList.add(day);

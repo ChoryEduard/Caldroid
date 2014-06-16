@@ -35,7 +35,9 @@ public final class MainActivity extends Activity {
     protected void onStart() {
         super.onStart();
         CalendarGenerator.toCurrentMonth(this);
-        CalendarGenerator.getMonthName();
+        CalendarGenerator.getPreviousMonthList();
+        CalendarGenerator.getCurentMonthList();
+        CalendarGenerator.getNextMonthList();
 
 
 
