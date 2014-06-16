@@ -6,15 +6,19 @@
                 android:layout_height="match_parent">
     <ImageView
             android:layout_width="wrap_content"
-            android:src="@android:drawable/menu_frame"
             android:layout_height="wrap_content"/>
     <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/tvActionCurrent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/red_action_bar"
+            android:textSize="@dimen/text_size_date"
+        android:layout_centerInParent="true" />
     <ImageView
             android:layout_width="wrap_content"
             android:id="@+id/imgUsers"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>

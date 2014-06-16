@@ -7,16 +7,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.TextView;
 
 /**
  * Created by eduard on 12.06.14.
  *
  */
+
 public final class CalendarFragment extends Fragment {
 
     private CalendroidView calendroid;
     private CalendroidAdapter adapter;
+    private GridView gridNameDayOfWeek;
     private Activity mActivity;
 
 
@@ -34,10 +37,23 @@ public final class CalendarFragment extends Fragment {
             return null;
         View vi = inflater.inflate(R.layout.fragment_calendar,container, false);
         if (vi != null ) {
+            gridNameDayOfWeek = (GridView)vi.findViewById(R.id.gridNameDayOfWeek);
             calendroid = (CalendroidView)vi.findViewById(R.id.calendar);
+            initUpNameOfWeek();
             setAdapter();
         }
         return vi;
+    }
+
+    private final void initUpNameOfWeek() {
+        gridNameDayOfWeek.setNumColumns(CalendroidView.NUM_OF_COLUMNS);
+        gridNameDayOfWeek.setColumnWidth(calendroid.getMColumnWidth());
+        gridNameDayOfWeek.setStretchMode(GridView.NO_STRETCH);
+        gridNameDayOfWeek.setAdapter(new DayOfWeekAdapter(getActivity(), calendroid.getMColumnWidth()));
+        int padding = calendroid.getPadding();
+        gridNameDayOfWeek.setPadding(padding * 2, padding, padding,0);
+        gridNameDayOfWeek.setHorizontalSpacing(padding);
+        gridNameDayOfWeek.setVerticalSpacing(padding);
     }
 
 

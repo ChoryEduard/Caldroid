@@ -15,12 +15,12 @@ import android.widget.GridView;
  */
 
 public class CalendroidView extends GridView {
-    private final static int GRID_PADDING = 2;
-    private final static int NUM_OF_COLUMNS = 7;
+    public final static int GRID_PADDING = 2;
+    public final static int NUM_OF_COLUMNS = 7;
 
 
     private int mColumnWidth;
-
+    private int mPanding;
     public Context mContext;
 
     public CalendroidView(Context context) {
@@ -43,12 +43,13 @@ public class CalendroidView extends GridView {
         Resources r = mContext.getResources();
         float padding = android.util.TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, GRID_PADDING, r.getDisplayMetrics());
 
+        mPanding = (int)padding;
         mColumnWidth = (int) ((getScreenWidth() - ((NUM_OF_COLUMNS + 1) * padding))  / NUM_OF_COLUMNS);
 
         this.setNumColumns(NUM_OF_COLUMNS);
         this.setColumnWidth(mColumnWidth);
         this.setStretchMode(GridView.NO_STRETCH);
-        this.setPadding((int)(padding), (int) padding, (int) padding,0);
+        this.setPadding((int)(padding) * 2, (int) padding, (int) padding,0);
         this.setHorizontalSpacing((int) padding);
         this.setVerticalSpacing((int) padding);
     }
@@ -69,5 +70,13 @@ public class CalendroidView extends GridView {
     public final int getMColumnWidth() {
         return mColumnWidth;
     }
+
+
+
+    public final int getPadding() {
+        return mPanding;
+    }
+
+
 
 }
