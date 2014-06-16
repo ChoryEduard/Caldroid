@@ -40,24 +40,14 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Scroll" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="INFO" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.example.Caldroid" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c336c0fa-4284-4b45-a435-fd44a5179ee3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/event/OnScrolling.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/CalendarFragment.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/screens/fragments/CalendarFragment.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/CalendroidAdapter.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/adapters/CalendroidAdapter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/CalendroidView.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/view/CalendroidView.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/DayOfWeekAdapter.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/adapters/DayOfWeekAdapter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/FooterCalendarView.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/view/FooterCalendarView.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/HeaderCalendarView.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/view/HeaderCalendarView.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/MainActivity.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/screens/activity/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/calendar_item.xml" afterPath="$PROJECT_DIR$/res/layout/calendar_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/colors.xml" afterPath="$PROJECT_DIR$/res/values/colors.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/fragment_calendar.xml" afterPath="$PROJECT_DIR$/res/layout/fragment_calendar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/adapters/CalendroidAdapter.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/adapters/CalendroidAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/view/CalendroidView.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/view/CalendroidView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Caldroid.iws" />
@@ -197,15 +187,15 @@
       <file leaf-file-name="CalendroidView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/view/CalendroidView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1200" max-vertical-offset="1674">
-              <caret line="86" column="71" selection-start-line="86" selection-start-column="71" selection-end-line="86" selection-end-column="71" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1331" max-vertical-offset="1818">
+              <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
               <folding>
-                <element signature="e#2257#2258#0" expanded="true" />
-                <element signature="e#2292#2293#0" expanded="true" />
-                <element signature="e#2331#2332#0" expanded="true" />
-                <element signature="e#2362#2363#0" expanded="true" />
-                <element signature="e#2704#2705#0" expanded="true" />
-                <element signature="e#2739#2740#0" expanded="true" />
+                <element signature="e#2319#2320#0" expanded="true" />
+                <element signature="e#2354#2355#0" expanded="true" />
+                <element signature="e#2393#2394#0" expanded="true" />
+                <element signature="e#2424#2425#0" expanded="true" />
+                <element signature="e#2860#2861#0" expanded="true" />
+                <element signature="e#2895#2896#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -224,8 +214,8 @@
       <file leaf-file-name="CalendroidAdapter.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/adapters/CalendroidAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.4414895" vertical-offset="1242" max-vertical-offset="3024">
-              <caret line="144" column="0" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.28989363" vertical-offset="2267" max-vertical-offset="3042">
+              <caret line="156" column="10" selection-start-line="156" selection-start-column="10" selection-end-line="156" selection-end-column="10" />
               <folding>
                 <element signature="e#1929#1930#0" expanded="true" />
                 <element signature="e#1961#1962#0" expanded="true" />
@@ -236,6 +226,16 @@
                 <element signature="e#3434#3435#0" expanded="true" />
                 <element signature="e#3507#3508#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Day.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/Day.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -875,10 +875,10 @@
         <option value="$PROJECT_DIR$/res/layout/calendar_item.xml" />
         <option value="$PROJECT_DIR$/src/com/example/Caldroid/event/OnScrolling.java" />
         <option value="$PROJECT_DIR$/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/src/com/example/Caldroid/view/CalendroidView.java" />
         <option value="$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java" />
         <option value="$PROJECT_DIR$/src/com/example/Caldroid/view/HeaderCalendarView.java" />
         <option value="$PROJECT_DIR$/src/com/example/Caldroid/screens/fragments/CalendarFragment.java" />
+        <option value="$PROJECT_DIR$/src/com/example/Caldroid/view/CalendroidView.java" />
         <option value="$PROJECT_DIR$/src/com/example/Caldroid/adapters/CalendroidAdapter.java" />
       </list>
     </option>
@@ -1371,7 +1371,11 @@
       <created>1402908812046</created>
       <updated>1402908812046</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="scrolling up">
+      <created>1402925767248</created>
+      <updated>1402925767248</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1445,14 +1449,15 @@
     </option>
     <MESSAGE value="Add action bar" />
     <MESSAGE value="Add Header" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Header" />
+    <MESSAGE value="scrolling up" />
+    <option name="LAST_COMMIT_MESSAGE" value="scrolling up" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/example/Caldroid/adapters/CalendroidAdapter.java</url>
-          <line>169</line>
+          <line>170</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
@@ -1519,12 +1524,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="1710">
           <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
-            <element signature="e#2257#2258#0" expanded="true" />
-            <element signature="e#2292#2293#0" expanded="true" />
-            <element signature="e#2331#2332#0" expanded="true" />
-            <element signature="e#2362#2363#0" expanded="true" />
-            <element signature="e#2704#2705#0" expanded="true" />
-            <element signature="e#2739#2740#0" expanded="true" />
+            <element signature="e#2319#2320#0" expanded="true" />
+            <element signature="e#2354#2355#0" expanded="true" />
+            <element signature="e#2393#2394#0" expanded="true" />
+            <element signature="e#2424#2425#0" expanded="true" />
+            <element signature="e#2860#2861#0" expanded="true" />
+            <element signature="e#2895#2896#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1627,12 +1632,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="1710">
           <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
           <folding>
-            <element signature="e#2257#2258#0" expanded="true" />
-            <element signature="e#2292#2293#0" expanded="true" />
-            <element signature="e#2331#2332#0" expanded="true" />
-            <element signature="e#2362#2363#0" expanded="true" />
-            <element signature="e#2704#2705#0" expanded="true" />
-            <element signature="e#2739#2740#0" expanded="true" />
+            <element signature="e#2319#2320#0" expanded="true" />
+            <element signature="e#2354#2355#0" expanded="true" />
+            <element signature="e#2393#2394#0" expanded="true" />
+            <element signature="e#2424#2425#0" expanded="true" />
+            <element signature="e#2860#2861#0" expanded="true" />
+            <element signature="e#2895#2896#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1859,21 +1864,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/view/CalendroidView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1200" max-vertical-offset="1674">
-          <caret line="86" column="71" selection-start-line="86" selection-start-column="71" selection-end-line="86" selection-end-column="71" />
-          <folding>
-            <element signature="e#2257#2258#0" expanded="true" />
-            <element signature="e#2292#2293#0" expanded="true" />
-            <element signature="e#2331#2332#0" expanded="true" />
-            <element signature="e#2362#2363#0" expanded="true" />
-            <element signature="e#2704#2705#0" expanded="true" />
-            <element signature="e#2739#2740#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/event/OnScrolling.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="35" max-vertical-offset="306">
@@ -1912,10 +1902,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/view/CalendroidView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1331" max-vertical-offset="1818">
+          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+          <folding>
+            <element signature="e#2319#2320#0" expanded="true" />
+            <element signature="e#2354#2355#0" expanded="true" />
+            <element signature="e#2393#2394#0" expanded="true" />
+            <element signature="e#2424#2425#0" expanded="true" />
+            <element signature="e#2860#2861#0" expanded="true" />
+            <element signature="e#2895#2896#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/Day.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/adapters/CalendroidAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.4414895" vertical-offset="1242" max-vertical-offset="3024">
-          <caret line="144" column="0" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.28989363" vertical-offset="2267" max-vertical-offset="3042">
+          <caret line="156" column="10" selection-start-line="156" selection-start-column="10" selection-end-line="156" selection-end-column="10" />
           <folding>
             <element signature="e#1929#1930#0" expanded="true" />
             <element signature="e#1961#1962#0" expanded="true" />

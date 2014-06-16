@@ -149,11 +149,12 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling 
         mPrewMonth = CalendarGenerator.getPreviousMonthList();
         mCorentMonth = CalendarGenerator.getCurentMonthList();
         mNextMonth = CalendarGenerator.getNextMonthList();
-        headerView.setDateHeader(String.valueOf(mCorentMonth.get(0).Month), String.valueOf(mCorentMonth.get(0).Year));
+        headerView.setDateHeader(String.valueOf(CalendarGenerator.getMonthName()), String.valueOf(mCorentMonth.get(0).Year));
 
     }
 
     private final Day getDateItem(final int pos) {
+        //mPrewMonth.get(0).
         if (mPrewMonth.size() > pos)
             return mPrewMonth.get(pos);
         else if ((mCorentMonth.size() + mPrewMonth.size()) > pos)
@@ -170,7 +171,7 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling 
         mPrewMonth = CalendarGenerator.getPreviousMonthList();
         mCorentMonth = CalendarGenerator.getCurentMonthList();
         mNextMonth = CalendarGenerator.getNextMonthList();
-        headerView.setDateHeader(String.valueOf(mCorentMonth.get(0).Month), String.valueOf(mCorentMonth.get(0).Year));
+        headerView.setDateHeader(String.valueOf(CalendarGenerator.getMonthName()), String.valueOf(mCorentMonth.get(0).Year));
         notifyDataSetChanged();
     }
 

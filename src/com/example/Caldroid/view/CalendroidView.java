@@ -1,8 +1,10 @@
 package com.example.Caldroid.view;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -83,7 +85,9 @@ public final class CalendroidView extends GridView {
 
     @Override
     protected int computeVerticalScrollOffset(){
-        Log.i("Scroll", " state i = " + super.computeVerticalScrollOffset());
+        int first = getFirstVisiblePosition();
+        scrollInCenter();
+        Log.i("Scroll", "First = " + first + " state i = " + super.computeVerticalScrollOffset());
         if (super.computeVerticalScrollOffset() == 0) scrolling.OnScrollUp();
         return super.computeVerticalScrollOffset();
     }
@@ -91,6 +95,12 @@ public final class CalendroidView extends GridView {
 
     public final void setScroll(final OnScrolling _scroll) {
         scrolling = _scroll;
+    }
+
+
+
+    public final void scrollInCenter() {
+
     }
 
 
