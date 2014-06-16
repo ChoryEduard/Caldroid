@@ -1,10 +1,15 @@
 package com.example.Caldroid;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
+
+import com.example.Caldroid.dateHelper.CalendarGenerator;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
 
 public final class MainActivity extends Activity {
 
@@ -14,6 +19,7 @@ public final class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         addFragmentCalendar();
+
     }
 
 
@@ -23,6 +29,16 @@ public final class MainActivity extends Activity {
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.frameContainer_M, calendar);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        CalendarGenerator.toCurrentMonth(this);
+        CalendarGenerator.getMonthName();
+
+
+
     }
 
 
