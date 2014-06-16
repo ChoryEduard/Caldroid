@@ -43,6 +43,13 @@ public final class CalendarFragment extends Fragment implements OnItemClickListe
         ((MainActivity) mActivity).setCustomActionBar(initializeActionBar());
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        calendroid.smoothScrollToPosition((int)(adapter.getCount()));
+        calendroid.setInitFinish(true);
+    }
 
     @Override
     public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,6 +64,8 @@ public final class CalendarFragment extends Fragment implements OnItemClickListe
             setSizeHeader();
             setAdapter();
             setCalendarListener();
+
+            //
         }
         return vi;
     }
@@ -86,6 +95,7 @@ public final class CalendarFragment extends Fragment implements OnItemClickListe
         adapter = new CalendroidAdapter(getActivity(), calendroid.getMColumnWidth(), header);
         calendroid.setScroll(adapter);
         calendroid.setAdapter(adapter);
+        header.setOnSetCurrent(adapter);
     }
 
 

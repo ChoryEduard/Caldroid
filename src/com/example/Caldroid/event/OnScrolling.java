@@ -8,4 +8,6 @@ public interface OnScrolling {
 
     public void OnScrollUp();
     public void OnScrollDown();
+    public int getSizeCalendar();
+    public int getOffsetPixel();
 }

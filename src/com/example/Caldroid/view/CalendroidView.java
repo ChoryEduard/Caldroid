@@ -27,6 +27,8 @@ public final class CalendroidView extends GridView {
     private OnScrolling scrolling;
     private int mColumnWidth;
     private int mPanding;
+    private boolean isFinish = false;
+
 
     public CalendroidView(Context context) {
         super(context);
@@ -83,13 +85,34 @@ public final class CalendroidView extends GridView {
     }
 
 
+
+
     @Override
     protected int computeVerticalScrollOffset(){
-        int first = getFirstVisiblePosition();
-        scrollInCenter();
-        Log.i("Scroll", "First = " + first + " state i = " + super.computeVerticalScrollOffset());
-        if (super.computeVerticalScrollOffset() == 0) scrolling.OnScrollUp();
-        return super.computeVerticalScrollOffset();
+            int first = getFirstVisiblePosition();
+            int last = getLastVisiblePosition();
+        if (first <= 7) {
+            //scrollInCenter();
+           //
+
+            if (isFinish) {
+                isFinish = false;
+                /*scrollTo(0, scrolling.getSizeCalendar() / 2);*/
+                scrolling.OnScrollUp();
+                smoothScrollByOffset(scrolling.getOffsetPixel());
+                //smoothScrollToPosition(scrolling.getSizeCalendar() / 2);
+
+                //
+
+            }
+
+            Log.i("Scroll", "First = " + first + " last =" + last);
+            //scrolling.OnScrollUp();
+            return super.computeVerticalScrollOffset();
+        }else {
+            isFinish = true;
+        }
+        return 0;
     }
 
 
@@ -98,9 +121,8 @@ public final class CalendroidView extends GridView {
     }
 
 
-
-    public final void scrollInCenter() {
-
+    public final void setInitFinish(final boolean finish) {
+        isFinish = finish;
     }
 
 

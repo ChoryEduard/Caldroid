@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.Caldroid.R;
+import com.example.Caldroid.event.OnSetCurrent;
 
 /**
  * Created by eduard on 12.06.14.
@@ -19,6 +20,7 @@ public final class HeaderCalendarView extends RelativeLayout implements OnClickL
     private TextView txtMonth;
     private TextView txtYear;
     private View layout;
+    private OnSetCurrent onSetCurrent;
 
     public HeaderCalendarView(Context context) {
         super(context);
@@ -53,6 +55,7 @@ public final class HeaderCalendarView extends RelativeLayout implements OnClickL
 
     @Override
     public final void onClick(View v) {
+        onSetCurrent.onSetCurrent();
     }
 
 
@@ -65,5 +68,9 @@ public final class HeaderCalendarView extends RelativeLayout implements OnClickL
     public final void setDateHeader(final String month, final String year) {
         txtMonth.setText(month);
         txtYear.setText(year);
+    }
+
+    public void setOnSetCurrent(OnSetCurrent onSetCurrent) {
+        this.onSetCurrent = onSetCurrent;
     }
 }

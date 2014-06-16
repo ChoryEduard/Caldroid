@@ -18,6 +18,7 @@ import com.example.Caldroid.R;
 import com.example.Caldroid.dateHelper.CalendarGenerator;
 import com.example.Caldroid.dateHelper.Day;
 import com.example.Caldroid.event.OnScrolling;
+import com.example.Caldroid.event.OnSetCurrent;
 import com.example.Caldroid.view.HeaderCalendarView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -34,14 +35,18 @@ import java.util.ArrayList;
  * Scroll work (call) in custom Grid View
  */
 
-public final class CalendroidAdapter extends BaseAdapter implements OnScrolling {
+public final class CalendroidAdapter extends BaseAdapter implements OnScrolling, OnSetCurrent {
 
     private Context mContext;
     private LayoutInflater inflater;
     private int mColumnWidth;
-    private ArrayList<Day> mPrewMonth = new ArrayList<Day>();
+    private ArrayList<Day> finalCalendar = new ArrayList<Day>();
+  /*  private ArrayList<Day> mPrewMonth = new ArrayList<Day>();
     private ArrayList<Day> mCorentMonth = new ArrayList<Day>();
-    private ArrayList<Day> mNextMonth = new ArrayList<Day>();
+    private ArrayList<Day> mNextMonth = new ArrayList<Day>();*/
+    private int sizePrew = 0;
+    private int sizeCorent = 0;
+    private int sizeNext= 0;
 
     private HeaderCalendarView headerView;
 
@@ -85,57 +90,66 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling 
         TextView txtItem = (TextView)layout.findViewById(R.id.tvDateCalItem);
 
         day = getDateItem(i);
-        txtItem.setText(String.valueOf(day.Day));
-        imgItem.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Picasso.with(mContext).load(day.imgURL).into(imgItem);
+        if (day != null) {
+            txtItem.setText(String.valueOf(day.Day));
+            imgItem.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            Picasso.with(mContext).load(day.imgURL).into(imgItem);
 
-        Transformation transformation = new Transformation() {
+            Transformation transformation = new Transformation() {
 
-            @Override public Bitmap transform(Bitmap source) {
-                int targetWidth = imgItem.getWidth();
-                double aspectRatio = (double) source.getHeight() / (double) source.getWidth();
-                int targetHeight = (int) (targetWidth * aspectRatio);
-                Bitmap result = Bitmap.createScaledBitmap(source, targetWidth, targetHeight, false);
-                if (result != source) {
-                    source.recycle();
+                @Override
+                public Bitmap transform(Bitmap source) {
+                    int targetWidth = imgItem.getWidth();
+                    double aspectRatio = (double) source.getHeight() / (double) source.getWidth();
+                    int targetHeight = (int) (targetWidth * aspectRatio);
+                    Bitmap result = Bitmap.createScaledBitmap(source, targetWidth, targetHeight, false);
+                    if (result != source) {
+                        source.recycle();
+                    }
+                    return result;
                 }
-                return result;
-            }
-            @Override public String key() {
-                return "transformation" + " desiredWidth";
-            }
-        };
 
-        String mMessage_pic_url = day.imgURL;
+                @Override
+                public String key() {
+                    return "transformation" + " desiredWidth";
+                }
+            };
 
-        Picasso.with(mContext)
-                .load(mMessage_pic_url)
-                .error(android.R.drawable.stat_notify_error)
-                .transform(transformation)
-                .into(imgItem);
-        isTransperent(imgItem, i);
+            String mMessage_pic_url = day.imgURL;
+
+            Picasso.with(mContext)
+                    .load(mMessage_pic_url)
+                    .error(android.R.drawable.stat_notify_error)
+                    .transform(transformation)
+                    .into(imgItem);
+            isTransperent(imgItem, i);
+        }
         return layout;
     }
 
 
     private final int getSize() {
-        return mPrewMonth.size() + mCorentMonth.size() + mNextMonth.size();
+        return finalCalendar.size() + finalCalendar.get(0).getWeekDay();
     }
 
 
     private final void isTransperent(ImageView item, final int pos) {
-        if (mPrewMonth.size() < pos /*|| (mCorentMonth.size() + mPrewMonth.size()) < pos*/)
+        final int offset =  finalCalendar.get(0).getWeekDay();
+        if (sizePrew  > pos - offset || sizePrew + sizeCorent - 2 > offset)
+            setTransparent(item, false);
+        /*if (mPrewMonth.size() < pos - offset || (mCorentMonth.size() +
+                mPrewMonth.size()) < pos - offset)
             setTransparent(item, true);
-        else setTransparent(item, false);
+        else setTransparent(item, false);*/
 
     }
 
 
     private final void setTransparent(ImageView item, boolean isAlpa) {
-        /*if (isAlpa)
+        if (!isAlpa)
             item.setImageAlpha(50);
         else
-            item.setImageAlpha(255);*/
+            item.setImageAlpha(255);
     }
 
     /*
@@ -146,21 +160,25 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling 
     private final void init() {
         CalendarGenerator.toCurrentMonth(mContext);
         CalendarGenerator.getMonthName();
-        mPrewMonth = CalendarGenerator.getPreviousMonthList();
-        mCorentMonth = CalendarGenerator.getCurentMonthList();
-        mNextMonth = CalendarGenerator.getNextMonthList();
-        headerView.setDateHeader(String.valueOf(CalendarGenerator.getMonthName()), String.valueOf(mCorentMonth.get(0).Year));
+        sizePrew = CalendarGenerator.getPreviousMonthList().size();
+        sizeCorent = CalendarGenerator.getCurentMonthList().size();
+        sizeNext = CalendarGenerator.getNextMonthList().size();
+        finalCalendar = CalendarGenerator.getCurentMonthList();
+        //mPrewMonth = CalendarGenerator.getPreviousMonthList();
+        for (Day day: CalendarGenerator.getNextMonthList())
+                finalCalendar.add(day);
+        for (Day day: CalendarGenerator.getPreviousMonthList())
+            finalCalendar.add(0, day);
+        //mCorentMonth = CalendarGenerator.getCurentMonthList();
+        //mNextMonth = CalendarGenerator.getNextMonthList();
+        //headerView.setDateHeader(String.valueOf(CalendarGenerator.getMonthName()), String.valueOf(mCorentMonth.get(0).Year));
 
     }
 
     private final Day getDateItem(final int pos) {
-        //mPrewMonth.get(0).
-        if (mPrewMonth.size() > pos)
-            return mPrewMonth.get(pos);
-        else if ((mCorentMonth.size() + mPrewMonth.size()) > pos)
-            return mCorentMonth.get(pos - mPrewMonth.size());
-        else
-            return mNextMonth.get(pos - mPrewMonth.size() - mCorentMonth.size());
+        final int offset = finalCalendar.get(0).getWeekDay();
+        if (pos < offset) return null;
+        return finalCalendar.get(pos - offset);
 
     }
 
@@ -168,20 +186,57 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling 
     public void OnScrollUp() {
         Log.i("Scroll", "size = " + getSize());
         CalendarGenerator.toPreviousMonth();
-        mPrewMonth = CalendarGenerator.getPreviousMonthList();
-        mCorentMonth = CalendarGenerator.getCurentMonthList();
-        mNextMonth = CalendarGenerator.getNextMonthList();
-        headerView.setDateHeader(String.valueOf(CalendarGenerator.getMonthName()), String.valueOf(mCorentMonth.get(0).Year));
+        sizePrew = CalendarGenerator.getPreviousMonthList().size();
+        sizeCorent = CalendarGenerator.getCurentMonthList().size();
+        sizeNext = CalendarGenerator.getNextMonthList().size();
+        finalCalendar = CalendarGenerator.getCurentMonthList();
+        //mPrewMonth = CalendarGenerator.getPreviousMonthList();
+        for (Day day: CalendarGenerator.getNextMonthList())
+            finalCalendar.add(day);
+        for (int i = CalendarGenerator.getPreviousMonthList().size() - 1; i >= 0; i--)
+            finalCalendar.add(0, CalendarGenerator.getPreviousMonthList().get(i));
+        headerView.setDateHeader(String.valueOf(CalendarGenerator.getMonthName()), String.valueOf(finalCalendar.get(sizePrew).Year));
         notifyDataSetChanged();
     }
 
     @Override
     public void OnScrollDown() {
-
         CalendarGenerator.toNextMonth();
-        mPrewMonth = CalendarGenerator.getPreviousMonthList();
-        mCorentMonth = CalendarGenerator.getCurentMonthList();
-        mNextMonth = CalendarGenerator.getNextMonthList();
+        sizePrew = CalendarGenerator.getPreviousMonthList().size();
+        sizeCorent = CalendarGenerator.getCurentMonthList().size();
+        sizeNext = CalendarGenerator.getNextMonthList().size();
+        finalCalendar = CalendarGenerator.getCurentMonthList();
+        //mPrewMonth = CalendarGenerator.getPreviousMonthList();
+        for (Day day: CalendarGenerator.getNextMonthList())
+            finalCalendar.add(day);
+        for (int i = CalendarGenerator.getPreviousMonthList().size() - 1; i >= 0; i--)
+            finalCalendar.add(0, CalendarGenerator.getPreviousMonthList().get(i));
+    }
+
+    @Override
+    public int getSizeCalendar() {
+        return getSize();
+    }
+
+    @Override
+    public int getOffsetPixel() {
+        return 2;
+    }
+
+    @Override
+    public final void onSetCurrent() {
+        CalendarGenerator.toCurrentMonth(mContext);
+        sizePrew = CalendarGenerator.getPreviousMonthList().size();
+        sizeCorent = CalendarGenerator.getCurentMonthList().size();
+        sizeNext = CalendarGenerator.getNextMonthList().size();
+        finalCalendar = CalendarGenerator.getCurentMonthList();
+        //mPrewMonth = CalendarGenerator.getPreviousMonthList();
+        for (Day day: CalendarGenerator.getNextMonthList())
+            finalCalendar.add(day);
+        for (int i = CalendarGenerator.getPreviousMonthList().size() - 1; i >= 0; i--)
+            finalCalendar.add(0, CalendarGenerator.getPreviousMonthList().get(i));
+        headerView.setDateHeader(String.valueOf(CalendarGenerator.getMonthName()), String.valueOf(finalCalendar.get(sizePrew).Year));
+        notifyDataSetChanged();
     }
 }
 

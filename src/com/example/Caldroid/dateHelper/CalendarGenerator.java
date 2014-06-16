@@ -106,7 +106,7 @@ public class CalendarGenerator  {
             Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)]);
             String printString = String.valueOf(day.Day) +" "+String.valueOf(day.Month)+" "+String.valueOf(day.Year) + day.imgURL;
             Log.v(TAG , printString );
-            previousCalendarList.add(day);
+            nextCalendarList.add(day);
         }
         return nextCalendarList;
     }
