@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
 
+
+
 /**
  * Created by eduard on 12.06.14.
  *
@@ -21,6 +23,7 @@ public final class CalendarFragment extends Fragment {
     private CalendroidAdapter adapter;
     private GridView gridNameDayOfWeek;
     private Activity mActivity;
+    private HeaderCalendarView header;
 
 
     @Override
@@ -39,7 +42,9 @@ public final class CalendarFragment extends Fragment {
         if (vi != null ) {
             gridNameDayOfWeek = (GridView)vi.findViewById(R.id.gridNameDayOfWeek);
             calendroid = (CalendroidView)vi.findViewById(R.id.calendar);
+            header = (HeaderCalendarView)vi.findViewById(R.id.headerInfCalendar);
             initUpNameOfWeek();
+            setSizeHeader();
             setAdapter();
         }
         return vi;
@@ -54,6 +59,11 @@ public final class CalendarFragment extends Fragment {
         gridNameDayOfWeek.setPadding(padding * 2, padding, padding,0);
         gridNameDayOfWeek.setHorizontalSpacing(padding);
         gridNameDayOfWeek.setVerticalSpacing(padding);
+    }
+
+
+    private final void setSizeHeader() {
+        header.setSize(calendroid.getMColumnWidth());
     }
 
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
@@ -14,7 +15,7 @@ import android.widget.GridView;
  *
  */
 
-public class CalendroidView extends GridView {
+public final class CalendroidView extends GridView {
     public final static int GRID_PADDING = 2;
     public final static int NUM_OF_COLUMNS = 7;
 
@@ -41,7 +42,7 @@ public class CalendroidView extends GridView {
     private final void InitilizeGridLayout(Context _context) {
         mContext = _context;
         Resources r = mContext.getResources();
-        float padding = android.util.TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, GRID_PADDING, r.getDisplayMetrics());
+        float padding = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, GRID_PADDING, r.getDisplayMetrics());
 
         mPanding = (int)padding;
         mColumnWidth = (int) ((getScreenWidth() - ((NUM_OF_COLUMNS + 1) * padding))  / NUM_OF_COLUMNS);
@@ -77,6 +78,12 @@ public class CalendroidView extends GridView {
         return mPanding;
     }
 
+
+    @Override
+    protected int computeVerticalScrollOffset(){
+        Log.i("Scroll", " state i = " + super.computeVerticalScrollOffset());
+        return super.computeVerticalScrollOffset();
+    }
 
 
 }

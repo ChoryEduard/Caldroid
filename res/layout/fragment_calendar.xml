@@ -8,12 +8,26 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/day_of_week_height"
         android:background="@color/light_grey_background"
-        android:id="@+id/gridNameDayOfWeek" />
+        android:id="@+id/gridNameDayOfWeek"
+        android:layout_alignParentBottom="false" />
 
     <com.example.Caldroid.CalendroidView
             android:id="@+id/calendar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-        android:layout_below="@+id/gridNameDayOfWeek" />
+            android:layout_below="@+id/gridNameDayOfWeek" />
+
+    <com.example.Caldroid.HeaderCalendarView
+        android:id="@+id/headerInfCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gridNameDayOfWeek"
+        android:gravity="center" />
+
+    <com.example.Caldroid.FooterCalendarView
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

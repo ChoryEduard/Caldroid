@@ -9,6 +9,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+
 /**
  * Created by eduard on 12.06.14.
  * calendar adapter
@@ -19,6 +22,10 @@ public final class CalendroidAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater inflater;
     private int mColumnWidth;
+    private ArrayList<String> mPrewMonth = new ArrayList<String>();
+    private ArrayList<String> mCorentMonth = new ArrayList<String>();
+    private ArrayList<String> mNextMonth = new ArrayList<String>();
+
 
 
     private class ItemHolder {
@@ -32,6 +39,7 @@ public final class CalendroidAdapter extends BaseAdapter {
         mContext = _context;
         inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mColumnWidth = _columnWidth;
+        init();
     }
 
     @Override
@@ -50,7 +58,7 @@ public final class CalendroidAdapter extends BaseAdapter {
     }
 
     @Override
-    public final View getView(int i, View view, ViewGroup viewGroup) {
+    public final View getView(final int i, View view, ViewGroup viewGroup) {
         View layout = view;
         ItemHolder item;
         if (view == null) {
@@ -63,13 +71,50 @@ public final class CalendroidAdapter extends BaseAdapter {
         } else {
             item = (ItemHolder)layout.getTag();
         }
-        item.txtItem.setText(String.valueOf(i));
+        item.txtItem.setText(getDateItem(i));
+        isTransperent(item, i);
         return layout;
     }
 
 
     private final int getSize() {
-        return 100;
+        return mPrewMonth.size() + mCorentMonth.size() + mNextMonth.size();
     }
+
+
+    private final void isTransperent(ItemHolder item, final int pos) {
+        if (mPrewMonth.size() > pos || (mCorentMonth.size() + mPrewMonth.size()) < pos)
+            setTransparent(item);
+
+    }
+
+
+    private final void setTransparent(ItemHolder item) {
+        item.imgItem.setAlpha(100);
+    }
+
+    /*
+    * test init function
+    *
+     */
+
+    private final void init() {
+        for (int i = 1; i <= 31; i++) {
+            mPrewMonth.add(String.valueOf(i));
+            mCorentMonth.add(String.valueOf(i));
+            mNextMonth.add(String.valueOf(i));
+        }
+    }
+
+    private final String getDateItem(final int pos) {
+        if (mPrewMonth.size() > pos)
+            return mPrewMonth.get(pos);
+        else if ((mCorentMonth.size() + mPrewMonth.size()) > pos)
+            return mCorentMonth.get(pos - mPrewMonth.size());
+        else
+            return mNextMonth.get(pos - mPrewMonth.size() - mCorentMonth.size());
+
+    }
+
 }
 
