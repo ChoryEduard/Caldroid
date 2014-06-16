@@ -11,23 +11,23 @@
         android:id="@+id/gridNameDayOfWeek"
         android:layout_alignParentBottom="false" />
 
-    <com.example.Caldroid.CalendroidView
+    <com.example.Caldroid.view.CalendroidView
             android:id="@+id/calendar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/gridNameDayOfWeek" />
 
-    <com.example.Caldroid.HeaderCalendarView
+    <com.example.Caldroid.view.HeaderCalendarView
         android:id="@+id/headerInfCalendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/gridNameDayOfWeek"
         android:gravity="center" />
 
-    <com.example.Caldroid.FooterCalendarView
+   <!-- <com.example.Caldroid.view.FooterCalendarView
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true" />-->
 
 </RelativeLayout>

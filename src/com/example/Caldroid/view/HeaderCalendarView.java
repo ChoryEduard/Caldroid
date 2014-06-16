@@ -1,4 +1,4 @@
-package com.example.Caldroid;
+package com.example.Caldroid.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,6 +8,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.Caldroid.R;
 
 /**
  * Created by eduard on 12.06.14.
@@ -60,7 +62,7 @@ public final class HeaderCalendarView extends RelativeLayout implements OnClickL
     }
 
 
-    public final void setDateFooter(final String month, final String year) {
+    public final void setDateHeader(final String month, final String year) {
         txtMonth.setText(month);
         txtYear.setText(year);
     }

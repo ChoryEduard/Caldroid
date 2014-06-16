@@ -34,6 +34,7 @@ public class CalendarGenerator  {
 
     public static ArrayList<Day> getCurentMonthList(){
         Time today =  new Time();
+        currentCalendarList.clear();
         today = currentMonth;
          int randomID =imageURLs.length;
         Random random =  new Random();
@@ -57,6 +58,7 @@ public class CalendarGenerator  {
     }
     public static ArrayList<Day> getPreviousMonthList(){
         Time today =  new Time();
+        previousCalendarList.clear();
         today.set(currentMonth.monthDay, currentMonth.month, currentMonth.year);
         int randomID =imageURLs.length;
         Random random =  new Random();
@@ -84,6 +86,7 @@ public class CalendarGenerator  {
 
     public static ArrayList<Day> getNextMonthList(){
         Time today =  new Time();
+        nextCalendarList.clear();
         today.set(currentMonth.monthDay, currentMonth.month, currentMonth.year);
         int randomID =imageURLs.length;
         Random random =  new Random();

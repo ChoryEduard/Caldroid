@@ -6,7 +6,6 @@
                 android:background="@color/light_grey_item_background">
     <ImageView
             android:id="@+id/imgCalItem"
-            android:background="@color/orange"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     <TextView

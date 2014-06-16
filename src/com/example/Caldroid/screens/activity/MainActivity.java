@@ -1,14 +1,14 @@
-package com.example.Caldroid;
+package com.example.Caldroid.screens.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 
+import com.example.Caldroid.screens.fragments.CalendarFragment;
+import com.example.Caldroid.R;
 import com.example.Caldroid.dateHelper.CalendarGenerator;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 
 public final class MainActivity extends Activity {

@@ -1,4 +1,4 @@
-package com.example.Caldroid;
+package com.example.Caldroid.screens.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -7,9 +7,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.Caldroid.R;
+import com.example.Caldroid.dateHelper.Day;
+import com.example.Caldroid.screens.activity.MainActivity;
+import com.example.Caldroid.adapters.CalendroidAdapter;
+import com.example.Caldroid.adapters.DayOfWeekAdapter;
+import com.example.Caldroid.view.CalendroidView;
+import com.example.Caldroid.view.HeaderCalendarView;
 
 
 /**
@@ -17,7 +27,7 @@ import android.widget.TextView;
  *
  */
 
-public final class CalendarFragment extends Fragment {
+public final class CalendarFragment extends Fragment implements OnItemClickListener {
 
     private CalendroidView calendroid;
     private CalendroidAdapter adapter;
@@ -46,8 +56,13 @@ public final class CalendarFragment extends Fragment {
             initUpNameOfWeek();
             setSizeHeader();
             setAdapter();
+            setCalendarListener();
         }
         return vi;
+    }
+
+    private final void setCalendarListener() {
+        calendroid.setOnItemClickListener(this);
     }
 
     private final void initUpNameOfWeek() {
@@ -68,7 +83,8 @@ public final class CalendarFragment extends Fragment {
 
 
     private final void setAdapter() {
-        adapter = new CalendroidAdapter(getActivity(), calendroid.getMColumnWidth());
+        adapter = new CalendroidAdapter(getActivity(), calendroid.getMColumnWidth(), header);
+        calendroid.setScroll(adapter);
         calendroid.setAdapter(adapter);
     }
 
@@ -86,5 +102,10 @@ public final class CalendarFragment extends Fragment {
     }
 
 
-
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Day day = (Day)adapter.getItem(position);
+        Toast.makeText(getActivity(), "Date: " + day.Day + "/" + (day.Month + 1) + "/" +
+                day.Year, Toast.LENGTH_SHORT).show();
+    }
 }

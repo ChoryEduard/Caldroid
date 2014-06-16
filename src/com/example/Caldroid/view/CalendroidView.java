@@ -1,4 +1,4 @@
-package com.example.Caldroid;
+package com.example.Caldroid.view;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -10,19 +10,21 @@ import android.view.Display;
 import android.view.WindowManager;
 import android.widget.GridView;
 
+import com.example.Caldroid.event.OnScrolling;
+
 /**
  * Created by eduard on 12.06.14.
  *
  */
 
 public final class CalendroidView extends GridView {
+
     public final static int GRID_PADDING = 2;
     public final static int NUM_OF_COLUMNS = 7;
-
-
+    public Context mContext;
+    private OnScrolling scrolling;
     private int mColumnWidth;
     private int mPanding;
-    public Context mContext;
 
     public CalendroidView(Context context) {
         super(context);
@@ -82,7 +84,13 @@ public final class CalendroidView extends GridView {
     @Override
     protected int computeVerticalScrollOffset(){
         Log.i("Scroll", " state i = " + super.computeVerticalScrollOffset());
+        if (super.computeVerticalScrollOffset() == 0) scrolling.OnScrollUp();
         return super.computeVerticalScrollOffset();
+    }
+
+
+    public final void setScroll(final OnScrolling _scroll) {
+        scrolling = _scroll;
     }
 
 

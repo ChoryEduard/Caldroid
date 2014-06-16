@@ -1,4 +1,4 @@
-package com.example.Caldroid;
+package com.example.Caldroid.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.Caldroid.R;
 
 /**
  * Created by eduard on 12.06.14.

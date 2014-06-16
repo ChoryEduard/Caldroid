@@ -1,4 +1,4 @@
-package com.example.Caldroid;
+package com.example.Caldroid.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,13 +8,15 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.example.Caldroid.R;
+
 /**
  * Created by eduard on 15.06.14.
  * footer Calendar
  * In have
  * refresh, +new, smile =)
  */
-public class FooterCalendarView extends RelativeLayout implements OnClickListener {
+public final class FooterCalendarView extends RelativeLayout implements OnClickListener {
 
     private View layout;
 
