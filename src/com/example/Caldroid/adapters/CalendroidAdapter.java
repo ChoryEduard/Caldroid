@@ -1,5 +1,7 @@
 package com.example.Caldroid.adapters;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -41,29 +45,22 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
     private LayoutInflater inflater;
     private int mColumnWidth;
     private ArrayList<Day> finalCalendar = new ArrayList<Day>();
-  /*  private ArrayList<Day> mPrewMonth = new ArrayList<Day>();
-    private ArrayList<Day> mCorentMonth = new ArrayList<Day>();
-    private ArrayList<Day> mNextMonth = new ArrayList<Day>();*/
     private int sizePrew = 0;
     private int sizeCorent = 0;
     private int sizeNext= 0;
-    private boolean isloadImg = false;
+    private boolean isloadImg = true;
+    private boolean isEndAnimation = true;
 
     private HeaderCalendarView headerView;
 
-
-
-   /* public class ItemHolder {
-        public ImageView imgItem;
-        public TextView txtItem;
-    }*/
-
     public CalendroidAdapter(final Context _context, int _columnWidth, HeaderCalendarView header) {
+
         mContext = _context;
-        inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mColumnWidth = _columnWidth;
         headerView = header;
         init();
+        inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mColumnWidth = _columnWidth;
+
     }
 
     @Override
@@ -84,9 +81,36 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
     @Override
     public final View getView(final int i, View view, ViewGroup viewGroup) {
         Day day;
-        View layout;
+        final View layout;
         layout = inflater.inflate(R.layout.calendar_item, viewGroup, false);
         layout.setLayoutParams(new GridView.LayoutParams(mColumnWidth, mColumnWidth));
+
+        if (i < 30 && isEndAnimation) {
+           if (layout.getVisibility() != View.VISIBLE) {
+               Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.smooth);
+               anim.setAnimationListener(new Animation.AnimationListener() {
+                   @Override
+                   public void onAnimationStart(Animation animation) {
+
+                   }
+
+                   @Override
+                   public void onAnimationEnd(Animation animation) {
+                       layout.setVisibility(View.VISIBLE);
+                   }
+
+                   @Override
+                   public void onAnimationRepeat(Animation animation) {
+
+                   }
+               });
+               if (i == 29) isEndAnimation = false;
+               layout.startAnimation(anim);
+           }
+        }else {
+            layout.setVisibility(View.VISIBLE);
+        }
+
         final ImageView imgItem = (ImageView)layout.findViewById(R.id.imgCalItem);
         TextView txtItem = (TextView)layout.findViewById(R.id.tvDateCalItem);
 
@@ -141,11 +165,6 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
             setTransparent(item, false);
         else
             setTransparent(item, true);
-        /*if (mPrewMonth.size() < pos - offset || (mCorentMonth.size() +
-                mPrewMonth.size()) < pos - offset)
-            setTransparent(item, true);
-        else setTransparent(item, false);*/
-
     }
 
 
@@ -162,7 +181,16 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
      */
 
     private final void init() {
-        onSetCurrent();
+        CalendarGenerator.toCurrentMonth(mContext);
+        sizePrew = CalendarGenerator.getPreviousMonthList().size();
+        sizeCorent = CalendarGenerator.getCurentMonthList().size();
+        sizeNext = CalendarGenerator.getNextMonthList().size();
+        finalCalendar = CalendarGenerator.getCurentMonthList();
+        for (Day day: CalendarGenerator.getNextMonthList())
+            finalCalendar.add(day);
+        for (int i = CalendarGenerator.getPreviousMonthList().size() - 1; i >= 0; i--)
+            finalCalendar.add(0, CalendarGenerator.getPreviousMonthList().get(i));
+        headerView.setDateHeader(String.valueOf(CalendarGenerator.getMonthName()), String.valueOf(finalCalendar.get(sizePrew).Year));
     }
 
     private final Day getDateItem(final int pos) {
@@ -174,17 +202,18 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
 
     @Override
     public void OnScrollUp() {
+        isEndAnimation = true;
         Log.i("Scroll", "size = " + getSize());
         CalendarGenerator.toPreviousMonth();
-        sizePrew = CalendarGenerator.getPreviousMonthList().size();
-        sizeCorent = CalendarGenerator.getCurentMonthList().size();
-        sizeNext = CalendarGenerator.getNextMonthList().size();
-        finalCalendar = CalendarGenerator.getCurentMonthList();
-        //mPrewMonth = CalendarGenerator.getPreviousMonthList();
-        for (Day day: CalendarGenerator.getNextMonthList())
+
+        ArrayList<Day> day = CalendarGenerator.getPreviousMonthList();
+        for (int i = day.size() - 1; i < 0; i++) {
+            finalCalendar.add(0, day.get(i));
+        }
+        /*for (Day day: CalendarGenerator.getNextMonthList())
             finalCalendar.add(day);
         for (int i = CalendarGenerator.getPreviousMonthList().size() - 1; i >= 0; i--)
-            finalCalendar.add(0, CalendarGenerator.getPreviousMonthList().get(i));
+            finalCalendar.add(0, CalendarGenerator.getPreviousMonthList().get(i));*/
         headerView.setDateHeader(String.valueOf(CalendarGenerator.getMonthName()), String.valueOf(finalCalendar.get(sizePrew).Year));
         notifyDataSetChanged();
     }
@@ -192,15 +221,10 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
     @Override
     public void OnScrollDown() {
         CalendarGenerator.toNextMonth();
-        sizePrew = CalendarGenerator.getPreviousMonthList().size();
-        sizeCorent = CalendarGenerator.getCurentMonthList().size();
-        sizeNext = CalendarGenerator.getNextMonthList().size();
-        finalCalendar = CalendarGenerator.getCurentMonthList();
-        //mPrewMonth = CalendarGenerator.getPreviousMonthList();
-        for (Day day: CalendarGenerator.getNextMonthList())
-            finalCalendar.add(day);
-        for (int i = CalendarGenerator.getPreviousMonthList().size() - 1; i >= 0; i--)
-            finalCalendar.add(0, CalendarGenerator.getPreviousMonthList().get(i));
+        ArrayList<Day> day = CalendarGenerator.getNextMonthList();
+        for (int i = 0; i < day.size(); i++) {
+            finalCalendar.add(day.get(i));
+        }
         headerView.setDateHeader(String.valueOf(CalendarGenerator.getMonthName()), String.valueOf(finalCalendar.get(sizePrew).Year));
 
         notifyDataSetChanged();
@@ -219,6 +243,7 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
     @Override
     public final void onSetCurrent() {
         CalendarGenerator.toCurrentMonth(mContext);
+
         sizePrew = CalendarGenerator.getPreviousMonthList().size();
         sizeCorent = CalendarGenerator.getCurentMonthList().size();
         sizeNext = CalendarGenerator.getNextMonthList().size();

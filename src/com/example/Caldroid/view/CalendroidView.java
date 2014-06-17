@@ -96,22 +96,20 @@ public final class CalendroidView extends GridView implements View.OnTouchListen
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        //Log.i("onMove", "event = " + event);
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 mOldY = (int)event.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                onOverScrolled((int)event.getY(), 0, true, true);
+                onOverScrolled((int)event.getY()/2, 0, true, true);
                 int delta = (int)event.getY() - mOldY;
                 Log.i("onMove", "delta = " + delta + " offset = " + scrolling.getOffsetPixel());
-                if ( delta > scrolling.getOffsetPixel()) {
+                if ( delta < 50 && delta > 40 && delta > 1) {
                     isScroll = - 1;
-                    scrolling.OnScrollDown();
-                    smoothScrollToPosition((scrolling.getSizeCalendar()));
-                } else if ( delta > - scrolling.getOffsetPixel()) {
+                    scrolling.OnScrollUp();
+                } else if ( delta > -50 && delta < -40) {
                     isScroll = 1;
-                    mOldY = (int)event.getY();
+                    scrolling.OnScrollDown();
                 }
 
                 break;
