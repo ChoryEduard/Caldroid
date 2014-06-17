@@ -47,6 +47,7 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
     private int sizePrew = 0;
     private int sizeCorent = 0;
     private int sizeNext= 0;
+    private boolean isloadImg = false;
 
     private HeaderCalendarView headerView;
 
@@ -84,7 +85,7 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
     public final View getView(final int i, View view, ViewGroup viewGroup) {
         Day day;
         View layout;
-        layout = inflater.inflate(R.layout.calendar_item, viewGroup,false);
+        layout = inflater.inflate(R.layout.calendar_item, viewGroup, false);
         layout.setLayoutParams(new GridView.LayoutParams(mColumnWidth, mColumnWidth));
         final ImageView imgItem = (ImageView)layout.findViewById(R.id.imgCalItem);
         TextView txtItem = (TextView)layout.findViewById(R.id.tvDateCalItem);
@@ -93,39 +94,40 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
         if (day != null) {
             txtItem.setText(String.valueOf(day.Day));
             imgItem.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            Picasso.with(mContext).load(day.imgURL).into(imgItem);
-
-            Transformation transformation = new Transformation() {
-
-                @Override
-                public Bitmap transform(Bitmap source) {
-                    int targetWidth = imgItem.getWidth();
-                    double aspectRatio = (double) source.getHeight() / (double) source.getWidth();
-                    int targetHeight = (int) (targetWidth * aspectRatio);
-                    Bitmap result = Bitmap.createScaledBitmap(source, targetWidth, targetHeight, false);
-                    if (result != source) {
-                        source.recycle();
+            if (isloadImg) {
+                Picasso.with(mContext).load(day.imgURL).into(imgItem);
+                Transformation transformation = new Transformation() {
+                    @Override
+                    public Bitmap transform(Bitmap source) {
+                        int targetWidth = imgItem.getWidth();
+                        double aspectRatio = (double) source.getHeight() / (double) source.getWidth();
+                        int targetHeight = (int) (targetWidth * aspectRatio);
+                        Bitmap result = Bitmap.createScaledBitmap(source, targetWidth, targetHeight, false);
+                        if (result != source) {
+                            source.recycle();
+                        }
+                        return result;
                     }
-                    return result;
-                }
 
-                @Override
-                public String key() {
-                    return "transformation" + " desiredWidth";
-                }
-            };
+                    @Override
+                    public String key() {
+                        return "transformation" + " desiredWidth";
+                    }
+                };
 
-            String mMessage_pic_url = day.imgURL;
+                String mMessage_pic_url = day.imgURL;
 
-            Picasso.with(mContext)
-                    .load(mMessage_pic_url)
-                    .error(android.R.drawable.stat_notify_error)
-                    .transform(transformation)
-                    .into(imgItem);
+                Picasso.with(mContext)
+                        .load(mMessage_pic_url)
+                        .error(android.R.drawable.stat_notify_error)
+                        .transform(transformation)
+                        .into(imgItem);
+            }
             isTransperent(imgItem, i);
         }
         return layout;
     }
+
 
 
     private final int getSize() {
@@ -135,8 +137,10 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
 
     private final void isTransperent(ImageView item, final int pos) {
         final int offset =  finalCalendar.get(0).getWeekDay();
-        if (sizePrew  > pos - offset || sizePrew + sizeCorent - 2 > offset)
+        if (sizePrew  > pos - offset || sizePrew + sizeCorent - 2 < pos)
             setTransparent(item, false);
+        else
+            setTransparent(item, true);
         /*if (mPrewMonth.size() < pos - offset || (mCorentMonth.size() +
                 mPrewMonth.size()) < pos - offset)
             setTransparent(item, true);
@@ -147,9 +151,9 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
 
     private final void setTransparent(ImageView item, boolean isAlpa) {
         if (!isAlpa)
-            item.setImageAlpha(50);
+            item.setAlpha(50);
         else
-            item.setImageAlpha(255);
+            item.setAlpha(255);
     }
 
     /*
@@ -158,21 +162,7 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
      */
 
     private final void init() {
-        CalendarGenerator.toCurrentMonth(mContext);
-        CalendarGenerator.getMonthName();
-        sizePrew = CalendarGenerator.getPreviousMonthList().size();
-        sizeCorent = CalendarGenerator.getCurentMonthList().size();
-        sizeNext = CalendarGenerator.getNextMonthList().size();
-        finalCalendar = CalendarGenerator.getCurentMonthList();
-        //mPrewMonth = CalendarGenerator.getPreviousMonthList();
-        for (Day day: CalendarGenerator.getNextMonthList())
-                finalCalendar.add(day);
-        for (Day day: CalendarGenerator.getPreviousMonthList())
-            finalCalendar.add(0, day);
-        //mCorentMonth = CalendarGenerator.getCurentMonthList();
-        //mNextMonth = CalendarGenerator.getNextMonthList();
-        //headerView.setDateHeader(String.valueOf(CalendarGenerator.getMonthName()), String.valueOf(mCorentMonth.get(0).Year));
-
+        onSetCurrent();
     }
 
     private final Day getDateItem(final int pos) {
@@ -211,6 +201,9 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
             finalCalendar.add(day);
         for (int i = CalendarGenerator.getPreviousMonthList().size() - 1; i >= 0; i--)
             finalCalendar.add(0, CalendarGenerator.getPreviousMonthList().get(i));
+        headerView.setDateHeader(String.valueOf(CalendarGenerator.getMonthName()), String.valueOf(finalCalendar.get(sizePrew).Year));
+
+        notifyDataSetChanged();
     }
 
     @Override
@@ -220,7 +213,7 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
 
     @Override
     public int getOffsetPixel() {
-        return 2;
+        return mColumnWidth * 4;
     }
 
     @Override

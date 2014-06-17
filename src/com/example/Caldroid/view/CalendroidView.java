@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.GridView;
 
@@ -19,7 +21,7 @@ import com.example.Caldroid.event.OnScrolling;
  *
  */
 
-public final class CalendroidView extends GridView {
+public final class CalendroidView extends GridView implements View.OnTouchListener {
 
     public final static int GRID_PADDING = 2;
     public final static int NUM_OF_COLUMNS = 7;
@@ -27,7 +29,8 @@ public final class CalendroidView extends GridView {
     private OnScrolling scrolling;
     private int mColumnWidth;
     private int mPanding;
-    private boolean isFinish = false;
+    private int mOldY = 0;
+    private int isScroll = 0;
 
 
     public CalendroidView(Context context) {
@@ -49,7 +52,7 @@ public final class CalendroidView extends GridView {
         mContext = _context;
         Resources r = mContext.getResources();
         float padding = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, GRID_PADDING, r.getDisplayMetrics());
-
+        setOnTouchListener(this);
         mPanding = (int)padding;
         mColumnWidth = (int) ((getScreenWidth() - ((NUM_OF_COLUMNS + 1) * padding))  / NUM_OF_COLUMNS);
 
@@ -85,45 +88,45 @@ public final class CalendroidView extends GridView {
     }
 
 
-
-
-    @Override
-    protected int computeVerticalScrollOffset(){
-            int first = getFirstVisiblePosition();
-            int last = getLastVisiblePosition();
-        if (first <= 7) {
-            //scrollInCenter();
-           //
-
-            if (isFinish) {
-                isFinish = false;
-                /*scrollTo(0, scrolling.getSizeCalendar() / 2);*/
-                scrolling.OnScrollUp();
-                smoothScrollByOffset(scrolling.getOffsetPixel());
-                //smoothScrollToPosition(scrolling.getSizeCalendar() / 2);
-
-                //
-
-            }
-
-            Log.i("Scroll", "First = " + first + " last =" + last);
-            //scrolling.OnScrollUp();
-            return super.computeVerticalScrollOffset();
-        }else {
-            isFinish = true;
-        }
-        return 0;
-    }
-
-
     public final void setScroll(final OnScrolling _scroll) {
         scrolling = _scroll;
     }
 
 
-    public final void setInitFinish(final boolean finish) {
-        isFinish = finish;
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        //Log.i("onMove", "event = " + event);
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                mOldY = (int)event.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                onOverScrolled((int)event.getY(), 0, true, true);
+                int delta = (int)event.getY() - mOldY;
+                Log.i("onMove", "delta = " + delta + " offset = " + scrolling.getOffsetPixel());
+                if ( delta > scrolling.getOffsetPixel()) {
+                    isScroll = - 1;
+                    scrolling.OnScrollDown();
+                    smoothScrollToPosition((scrolling.getSizeCalendar()));
+                } else if ( delta > - scrolling.getOffsetPixel()) {
+                    isScroll = 1;
+                    mOldY = (int)event.getY();
+                }
+
+                break;
+            case MotionEvent.ACTION_UP:
+              /*  if (isScroll == 1) {
+                    scrolling.OnScrollDown();
+                    smoothScrollToPosition((scrolling.getSizeCalendar()));
+                    isScroll = 0;
+                } else if (isScroll == -1) {
+                    scrolling.OnScrollUp();
+                    smoothScrollToPosition((scrolling.getSizeCalendar()));
+                    isScroll = 0;
+                }*/
+                break;
+        }
+        return false;
     }
-
-
 }

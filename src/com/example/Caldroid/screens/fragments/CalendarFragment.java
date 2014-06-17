@@ -46,9 +46,6 @@ public final class CalendarFragment extends Fragment implements OnItemClickListe
     @Override
     public void onResume() {
         super.onResume();
-
-        calendroid.smoothScrollToPosition((int)(adapter.getCount()));
-        calendroid.setInitFinish(true);
     }
 
     @Override
@@ -64,6 +61,7 @@ public final class CalendarFragment extends Fragment implements OnItemClickListe
             setSizeHeader();
             setAdapter();
             setCalendarListener();
+            calendroid.smoothScrollToPosition((adapter.getCount()));
 
             //
         }
