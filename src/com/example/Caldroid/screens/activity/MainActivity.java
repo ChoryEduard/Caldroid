@@ -2,13 +2,17 @@ package com.example.Caldroid.screens.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.Caldroid.screens.fragments.CalendarFragment;
+
 import com.example.Caldroid.R;
+
 import com.example.Caldroid.dateHelper.CalendarGenerator;
+import com.example.Caldroid.screens.fragments.CalendarFragment;
+import com.example.Caldroid.screens.fragments.FragmentCalendroid;
 
 
 public final class MainActivity extends Activity {
@@ -24,7 +28,9 @@ public final class MainActivity extends Activity {
 
 
     private final void addFragmentCalendar() {
-        CalendarFragment calendar = new CalendarFragment();
+        //        CalendarFragment calendar = new CalendarFragment();
+        Fragment calendar =  new FragmentCalendroid();
+
         FragmentTransaction fragmentTransaction;
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.frameContainer_M, calendar);
@@ -34,10 +40,13 @@ public final class MainActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        CalendarGenerator.toCurrentMonth(this);
-        CalendarGenerator.getPreviousMonthList();
-        CalendarGenerator.getCurentMonthList();
-        CalendarGenerator.getNextMonthList();
+//        CalendarGenerator.toCurrentMonth(this);
+//        CalendarGenerator.getWeekBeforThisDay( CalendarGenerator.getPreviousMonthList().get(0));
+//        CalendarGenerator.toPreviousMonth();
+//        CalendarGenerator.getWeekBeforThisDay( CalendarGenerator.getPreviousMonthList().get(0));
+//        CalendarGenerator.getPreviousMonthList();
+//        CalendarGenerator.getCurentMonthList();
+//        CalendarGenerator.getNextMonthList();
 
 
 

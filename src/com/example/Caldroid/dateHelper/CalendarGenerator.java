@@ -22,7 +22,9 @@ import java.util.Random;
 public class CalendarGenerator  {
     private static ArrayList<Day> currentCalendarList =  new ArrayList<Day>();
     private static ArrayList<Day> previousCalendarList =  new ArrayList<Day>();
+    private static ArrayList<Day> previousCalendarListMinusOne =  new ArrayList<Day>();
     private static ArrayList<Day> nextCalendarList =  new ArrayList<Day>();
+    private static ArrayList<Day> nextCalendarListPlusOne =  new ArrayList<Day>();
 
     private static Time currentMonth  =  new Time();
 
@@ -79,6 +81,24 @@ public class CalendarGenerator  {
             Log.v(TAG , printString );
             previousCalendarList.add(day);
         }
+
+        if (today.month == 0 ){
+            month = 11;
+            year = today.year - 1 ;
+        }else {
+            month = today.month - 1;
+            year = today.year;
+        }
+        today.set(1, month, year);
+        monthDay  = today.getActualMaximum(Time.MONTH_DAY);
+        for (int i = 1; i <= monthDay; i++){
+            today.set(i, month, year);
+            Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)]);
+            String printString = String.valueOf(day.Day) +" "+String.valueOf(day.Month)+" "+String.valueOf(day.Year) + day.imgURL;
+            Log.v(TAG , printString );
+            previousCalendarListMinusOne.add(day);
+        }
+
         return previousCalendarList;
     }
 
@@ -108,7 +128,27 @@ public class CalendarGenerator  {
             Log.v(TAG , printString );
             nextCalendarList.add(day);
         }
+        if (today.month == 11 ){
+            month = 0;
+            year = today.year + 1 ;
+        }else {
+            month = today.month+ 1;
+            year = today.year;
+        }
+        today.set(1, month, year);
+
+        monthDay  = today.getActualMaximum(Time.MONTH_DAY);
+        for (int i = 1; i <= monthDay; i++){
+            today.set(i, month, year);
+            Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)]);
+            String printString = String.valueOf(day.Day) +" "+String.valueOf(day.Month)+" "+String.valueOf(day.Year) + day.imgURL;
+            Log.v(TAG , printString );
+            nextCalendarListPlusOne.add(day);
+        }
         return nextCalendarList;
+    }
+    public static ArrayList<Day> getPrePreList(){
+      return nextCalendarListPlusOne;
     }
 
     public static void toCurrentMonth(Context context){
@@ -146,12 +186,23 @@ public class CalendarGenerator  {
     }
 
     public static String getMonthName(){
-
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(currentMonth.toMillis(false));
         String monthName = new SimpleDateFormat("MMM").format(cal.getTime());
         Log.v(TAG , monthName );
         return monthName;
+    }
 
+    public static ArrayList<Day> getWeekBeforThisDay(Day day){
+        ArrayList<Day> tempWeek =  new ArrayList<Day>();
+
+            for (int i = previousCalendarListMinusOne.size() - (day.Day + day.getWeekDay()); i <  previousCalendarListMinusOne.size() - day.Day ; i++  ){
+                tempWeek.add(previousCalendarListMinusOne.get(i+1));
+                String printString = String.valueOf(previousCalendarListMinusOne.get(i).Day) +" "+String.valueOf(previousCalendarListMinusOne.get(i).Month)+" "+String.valueOf(previousCalendarListMinusOne.get(i).Year);
+
+                Log.v("WeekTest",printString );
+            }
+
+        return tempWeek;
     }
 }

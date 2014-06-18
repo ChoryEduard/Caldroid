@@ -118,7 +118,7 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
         if (day != null) {
             txtItem.setText(String.valueOf(day.Day));
             imgItem.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            if (isloadImg) {
+
                 Picasso.with(mContext).load(day.imgURL).into(imgItem);
                 Transformation transformation = new Transformation() {
                     @Override
@@ -146,7 +146,7 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
                         .error(android.R.drawable.stat_notify_error)
                         .transform(transformation)
                         .into(imgItem);
-            }
+
             isTransperent(imgItem, i);
         }
         return layout;
@@ -174,6 +174,7 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
         else
             item.setAlpha(255);
     }
+
 
     /*
     * test init function
@@ -204,11 +205,18 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
     public void OnScrollUp() {
         isEndAnimation = true;
         Log.i("Scroll", "size = " + getSize());
+        ArrayList<Day> dayForDelete = CalendarGenerator.getNextMonthList();
+        int sizeOfAllDList = dayForDelete.size();
         CalendarGenerator.toPreviousMonth();
-
-        ArrayList<Day> day = CalendarGenerator.getPreviousMonthList();
-        for (int i = day.size() - 1; i < 0; i++) {
+        ArrayList<Day> day;
+        day = CalendarGenerator.getPreviousMonthList();
+        for (int i = day.size() - 1; i > 0; i--) {
             finalCalendar.add(0, day.get(i));
+        }
+        int finalCalendarSize  = finalCalendar.size();
+        for (int j = finalCalendarSize - 1;  j > (finalCalendarSize - sizeOfAllDList); j--  ){
+            finalCalendar.remove(j);
+
         }
         /*for (Day day: CalendarGenerator.getNextMonthList())
             finalCalendar.add(day);

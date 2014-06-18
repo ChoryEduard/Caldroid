@@ -24,4 +24,6 @@ public class Day {
     public int getWeekDay(){
         return date.weekDay;
     }
+
+
 }
