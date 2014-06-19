@@ -3,7 +3,9 @@ package com.example.Caldroid.EndllesList;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
@@ -15,7 +17,7 @@ import java.util.List;
 /**
  * Created by BruSD on 6/18/2014.
  */
-public class EndlessListView extends ListView implements AbsListView.OnScrollListener {
+public class EndlessListView extends ListView implements AbsListView.OnScrollListener, GestureDetector.OnGestureListener {
 
     private View footer;
     private boolean isLoading;
@@ -42,6 +44,7 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
     public void setListener(EndlessListener listener) {
         this.listener = listener;
     }
+
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem,
@@ -137,6 +140,38 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
 
     public EndlessListener setListener() {
         return listener;
+    }
+
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent e) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        velocityY = velocityY/2;
+        velocityX = velocityX/2;
+        return true;
     }
 
 

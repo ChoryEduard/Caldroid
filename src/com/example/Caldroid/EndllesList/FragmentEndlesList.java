@@ -63,7 +63,7 @@ public class FragmentEndlesList extends Fragment implements EndlessListView.Endl
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadDefoultList();
+                loadDefaultList();
             }
         });
         return v;
@@ -72,16 +72,18 @@ public class FragmentEndlesList extends Fragment implements EndlessListView.Endl
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         vi = inflater.inflate(R.layout.fragment_endlase_list,container, false);
         lv = (EndlessListView)vi.findViewById(R.id.el);
-        loadDefoultList();
+        lv.setFastScrollEnabled(false);
+
+        loadDefaultList();
 
         return vi;
     }
-    private void loadDefoultList(){
+    private void loadDefaultList(){
         EndlessAdapter adp = new EndlessAdapter(mActivity, initFirstList(), R.layout.row_layout, getScreenWidth()/7);
         lv.setLoadingView(R.layout.loading_layout);
         lv.setAdapter(adp);
         lv.setSelectionFromTop(2, 0);
-        lv.setFastScrollEnabled(false);
+
         lv.setListener(this);
     }
 

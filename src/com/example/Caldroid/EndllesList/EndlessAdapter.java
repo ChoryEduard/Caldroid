@@ -321,6 +321,8 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
     }
 
     public void setNextMonthToCurrent(final int firstItem, final int count) {
+        if (itemList.get(firstItem).get(6) == null)
+            return;
         final int itemMonth = itemList.get(firstItem).get(6).Month;
         Log.v("cs_cs", "mCurrentMonth: " + mCurrentMonth + " ; item month: " + itemMonth);
         if (mCurrentMonth != itemMonth) {
