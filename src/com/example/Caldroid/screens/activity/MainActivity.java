@@ -8,11 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 
 
+import com.example.Caldroid.EndllesList.FragmentEndlesList;
 import com.example.Caldroid.R;
 
-import com.example.Caldroid.dateHelper.CalendarGenerator;
-import com.example.Caldroid.screens.fragments.CalendarFragment;
-import com.example.Caldroid.screens.fragments.FragmentCalendroid;
 
 
 public final class MainActivity extends Activity {
@@ -29,8 +27,8 @@ public final class MainActivity extends Activity {
 
     private final void addFragmentCalendar() {
         //        CalendarFragment calendar = new CalendarFragment();
-        Fragment calendar =  new FragmentCalendroid();
-
+//        Fragment calendar =  new FragmentCalendroid();
+        Fragment calendar =  new FragmentEndlesList();
         FragmentTransaction fragmentTransaction;
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.frameContainer_M, calendar);

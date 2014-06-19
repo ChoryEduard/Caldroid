@@ -26,6 +26,9 @@ public class CalendarGenerator  {
     private static ArrayList<Day> nextCalendarList =  new ArrayList<Day>();
     private static ArrayList<Day> nextCalendarListPlusOne =  new ArrayList<Day>();
 
+    private static ArrayList<Week> currentCalendar =  new ArrayList<Week>();
+
+
     private static Time currentMonth  =  new Time();
 
     private static String TAG = "CC_MOB";
@@ -47,7 +50,7 @@ public class CalendarGenerator  {
         for (int i = 1; i <= monthDay; i++){
 
             today.set(i, month, year);
-            Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)]);
+            Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)], true);
             day.getWeekDay();
             String printString = String.valueOf(day.Day) +" "+String.valueOf(day.Month)+" "+String.valueOf(day.Year) + " "  + String.valueOf(day.getWeekDay());
                     Log.v(TAG , printString );
@@ -76,7 +79,7 @@ public class CalendarGenerator  {
         int monthDay  = today.getActualMaximum(Time.MONTH_DAY);
         for (int i = 1; i <= monthDay; i++){
             today.set(i, month, year);
-            Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)]);
+            Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)], false);
             String printString = String.valueOf(day.Day) +" "+String.valueOf(day.Month)+" "+String.valueOf(day.Year) + day.imgURL;
             Log.v(TAG , printString );
             previousCalendarList.add(day);
@@ -93,7 +96,7 @@ public class CalendarGenerator  {
         monthDay  = today.getActualMaximum(Time.MONTH_DAY);
         for (int i = 1; i <= monthDay; i++){
             today.set(i, month, year);
-            Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)]);
+            Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)], false);
             String printString = String.valueOf(day.Day) +" "+String.valueOf(day.Month)+" "+String.valueOf(day.Year) + day.imgURL;
             Log.v(TAG , printString );
             previousCalendarListMinusOne.add(day);
@@ -123,7 +126,7 @@ public class CalendarGenerator  {
         int monthDay  = today.getActualMaximum(Time.MONTH_DAY);
         for (int i = 1; i <= monthDay; i++){
             today.set(i, month, year);
-            Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)]);
+            Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)], false);
             String printString = String.valueOf(day.Day) +" "+String.valueOf(day.Month)+" "+String.valueOf(day.Year) + day.imgURL;
             Log.v(TAG , printString );
             nextCalendarList.add(day);
@@ -140,7 +143,7 @@ public class CalendarGenerator  {
         monthDay  = today.getActualMaximum(Time.MONTH_DAY);
         for (int i = 1; i <= monthDay; i++){
             today.set(i, month, year);
-            Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)]);
+            Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)], false);
             String printString = String.valueOf(day.Day) +" "+String.valueOf(day.Month)+" "+String.valueOf(day.Year) + day.imgURL;
             Log.v(TAG , printString );
             nextCalendarListPlusOne.add(day);
@@ -193,16 +196,96 @@ public class CalendarGenerator  {
         return monthName;
     }
 
-    public static ArrayList<Day> getWeekBeforThisDay(Day day){
-        ArrayList<Day> tempWeek =  new ArrayList<Day>();
 
-            for (int i = previousCalendarListMinusOne.size() - (day.Day + day.getWeekDay()); i <  previousCalendarListMinusOne.size() - day.Day ; i++  ){
-                tempWeek.add(previousCalendarListMinusOne.get(i+1));
-                String printString = String.valueOf(previousCalendarListMinusOne.get(i).Day) +" "+String.valueOf(previousCalendarListMinusOne.get(i).Month)+" "+String.valueOf(previousCalendarListMinusOne.get(i).Year);
 
-                Log.v("WeekTest",printString );
+    public static ArrayList<Week> getInitData(){
+        ArrayList<Day> tempList =  new ArrayList<Day>();
+        currentCalendar.clear();
+
+        tempList = getPreviousMonthList();
+        tempList.addAll(getCurentMonthList());
+        tempList.addAll(getNextMonthList());
+
+
+
+
+        for (int i = 0 ; i < tempList.size(); ){
+            Week week =  new Week();
+            int fierstDay = tempList.get(i).getWeekDay();
+            int indexLost = i+(6-fierstDay);
+            int lastDay;
+            if(indexLost <= tempList.size()-1){
+                lastDay = 6;
+            }else {
+                lastDay = tempList.get(tempList.size()-1).getWeekDay();
             }
+            for (int j = 0; j <= 6;  j++){
+                if(j >= fierstDay && j <= lastDay){
+                    week.add(j, tempList.get(i));
+                    i++;
+                } else{
+                    week.add(j, null);
+                }
+            }
+            currentCalendar.add(week);
+        }
+        return currentCalendar;
+    }
 
-        return tempWeek;
+    public static ArrayList<Week> getNextWeekMonthList(){
+        ArrayList<Day> tempList =  new ArrayList<Day>();
+        ArrayList<Week> result = new ArrayList<Week>();
+        toNextMonth();
+        tempList = getNextMonthList();
+
+        for (int i = 0 ; i < tempList.size(); ){
+            Week week =  new Week();
+            int fierstDay = tempList.get(i).getWeekDay();
+            int indexLost = i+(6-fierstDay);
+            int lastDay;
+            if(indexLost <= tempList.size()-1){
+                lastDay = 6;
+            }else {
+                lastDay = tempList.get(tempList.size()-1).getWeekDay();
+            }
+            for (int j = 0; j <= 6;  j++){
+                if(j >= fierstDay && j <= lastDay){
+                    week.add(j, tempList.get(i));
+                    i++;
+                } else{
+                    week.add(j, null);
+                }
+            }
+            result.add(week);
+        }
+        return result;
+    }
+
+    public static ArrayList<Week> getPrevWeekMonthList() {
+        ArrayList<Day> tempList = new ArrayList<Day>();
+        ArrayList<Week> result = new ArrayList<Week>();
+        toPreviousMonth();
+        tempList = getPreviousMonthList();
+        for (int i = 0 ; i < tempList.size(); ){
+            Week week =  new Week();
+            int fierstDay = tempList.get(i).getWeekDay();
+            int indexLost = i+(6-fierstDay);
+            int lastDay;
+            if(indexLost <= tempList.size()-1){
+                lastDay = 6;
+            }else {
+                lastDay = tempList.get(tempList.size()-1).getWeekDay();
+            }
+            for (int j = 0; j <= 6;  j++){
+                if(j >= fierstDay && j <= lastDay){
+                    week.add(j, tempList.get(i));
+                    i++;
+                } else{
+                    week.add(j, null);
+                }
+            }
+            result.add(week);
+        }
+        return result;
     }
 }

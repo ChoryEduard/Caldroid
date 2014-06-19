@@ -127,6 +127,7 @@ public final class CalendroidAdapter extends BaseAdapter implements OnScrolling,
                         double aspectRatio = (double) source.getHeight() / (double) source.getWidth();
                         int targetHeight = (int) (targetWidth * aspectRatio);
                         Bitmap result = Bitmap.createScaledBitmap(source, targetWidth, targetHeight, false);
+
                         if (result != source) {
                             source.recycle();
                         }
