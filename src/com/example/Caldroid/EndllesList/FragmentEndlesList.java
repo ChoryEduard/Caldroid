@@ -71,9 +71,7 @@ public class FragmentEndlesList extends Fragment implements EndlessListView.Endl
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         vi = inflater.inflate(R.layout.fragment_endlase_list,container, false);
-
         lv = (EndlessListView)vi.findViewById(R.id.el);
-
         loadDefoultList();
 
         return vi;
@@ -83,7 +81,7 @@ public class FragmentEndlesList extends Fragment implements EndlessListView.Endl
         lv.setLoadingView(R.layout.loading_layout);
         lv.setAdapter(adp);
         lv.setSelectionFromTop(2, 0);
-
+        lv.setFastScrollEnabled(false);
         lv.setListener(this);
     }
 

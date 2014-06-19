@@ -54,7 +54,7 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
             return ;
 
         int l = visibleItemCount + firstVisibleItem;
-
+        adapter.setNextMonthToCurrent(firstVisibleItem, visibleItemCount);
 
         if (l >= totalItemCount && !isLoading) {
             // It is time to add new data. We call the listener
@@ -78,9 +78,11 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
         }
     }
 
+
+
     private void scrolledDown(int last){
         Log.v("Position", "scrolledDown");
-        adapter.setNextMonthToCurrent(last);
+//        adapter.setNextMonthToCurrent(last);
         isUpdating = false;
     }
     private void scrolledUp(){
