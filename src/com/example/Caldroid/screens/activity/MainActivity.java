@@ -7,10 +7,8 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 
-
 import com.example.Caldroid.EndllesList.FragmentEndlesList;
 import com.example.Caldroid.R;
-
 
 
 public final class MainActivity extends Activity {
@@ -26,9 +24,8 @@ public final class MainActivity extends Activity {
 
 
     private final void addFragmentCalendar() {
-        //        CalendarFragment calendar = new CalendarFragment();
-//        Fragment calendar =  new FragmentCalendroid();
-        Fragment calendar =  new FragmentEndlesList();
+
+        Fragment calendar = new FragmentEndlesList();
         FragmentTransaction fragmentTransaction;
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.frameContainer_M, calendar);
@@ -41,7 +38,7 @@ public final class MainActivity extends Activity {
     }
 
 
-    // if argument equ NULL actionBar defaults
+
     public final void setCustomActionBar(final View _customView) {
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {

@@ -48,22 +48,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c336c0fa-4284-4b45-a435-fd44a5179ee3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/MyApplication.java" />
-      <change type="DELETED" beforePath="C:\ProgressDevelopment\Caldroid\res\layout\calendar_item.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\ProgressDevelopment\Caldroid\res\layout\custom_item_day_of_week.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\ProgressDevelopment\Caldroid\res\layout\footer_view.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\ProgressDevelopment\Caldroid\res\layout\fragment_calendar.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\ProgressDevelopment\Caldroid\res\layout\fragment_calendroid.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\ProgressDevelopment\Caldroid\res\layout\header_view.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/Day.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/Day.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessAdapter.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessListView.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessListView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/FragmentEndlesList.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/FragmentEndlesList.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/Caldroid/screens/activity/MainActivity.java" afterPath="$PROJECT_DIR$/src/com/example/Caldroid/screens/activity/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/fragment_endlase_list.xml" afterPath="$PROJECT_DIR$/res/layout/fragment_endlase_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main.xml" afterPath="$PROJECT_DIR$/res/layout/main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Caldroid.iws" />
@@ -127,29 +116,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="EndlessAdapter.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Day.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/Day.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="66" max-vertical-offset="884">
+              <caret line="50" column="30" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EndlessAdapter.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="2771">
-              <caret line="385" column="19" selection-start-line="385" selection-start-column="19" selection-end-line="385" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.5221843" vertical-offset="408" max-vertical-offset="2669">
+              <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
               <folding>
-                <element signature="e#2384#2385#0" expanded="true" />
-                <element signature="e#2422#2423#0" expanded="true" />
-                <element signature="e#2477#2478#0" expanded="true" />
-                <element signature="e#2522#2523#0" expanded="true" />
-                <element signature="e#2579#2580#0" expanded="true" />
-                <element signature="e#2635#2636#0" expanded="true" />
+                <element signature="e#2285#2286#0" expanded="true" />
+                <element signature="e#2323#2324#0" expanded="true" />
+                <element signature="e#2378#2379#0" expanded="true" />
+                <element signature="e#2423#2424#0" expanded="true" />
+                <element signature="e#2480#2481#0" expanded="true" />
+                <element signature="e#2536#2537#0" expanded="true" />
                 <element signature="method#getView#0;class#EndlessAdapter#0" expanded="false" />
                 <element signature="method#addToEndWithGlue#0;class#EndlessAdapter#0" expanded="false" />
                 <element signature="method#addToStartWithGlue#0;class#EndlessAdapter#0" expanded="false" />
-                <element signature="e#15044#15045#0" expanded="true" />
-                <element signature="e#15084#15085#0" expanded="true" />
-                <element signature="e#15117#15118#0" expanded="true" />
-                <element signature="e#15151#15152#0" expanded="true" />
-                <element signature="e#15302#15303#0" expanded="true" />
-                <element signature="e#15337#15338#0" expanded="true" />
-                <element signature="e#15367#15368#0" expanded="true" />
-                <element signature="e#15443#15444#0" expanded="true" />
+                <element signature="e#14864#14865#0" expanded="true" />
+                <element signature="e#14904#14905#0" expanded="true" />
+                <element signature="e#14938#14939#0" expanded="true" />
+                <element signature="e#14974#14975#0" expanded="true" />
+                <element signature="e#15131#15132#0" expanded="true" />
+                <element signature="e#15166#15167#0" expanded="true" />
+                <element signature="e#15197#15198#0" expanded="true" />
+                <element signature="e#15276#15277#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CalendarGenerator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3140" max-vertical-offset="3621">
+              <caret line="19" column="75" selection-start-line="19" selection-start-column="75" selection-end-line="19" selection-end-column="75" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#593#599#0" expanded="true" />
+                <element signature="e#5132#5138#0" expanded="true" />
+                <element signature="e#6205#6211#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -158,8 +174,8 @@
       <file leaf-file-name="FragmentEndlesList.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/FragmentEndlesList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1621" max-vertical-offset="2176">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="969" max-vertical-offset="2278">
+              <caret line="87" column="94" selection-start-line="87" selection-start-column="94" selection-end-line="87" selection-end-column="94" />
               <folding />
             </state>
           </provider>
@@ -168,18 +184,18 @@
       <file leaf-file-name="EndlessListView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessListView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1848" max-vertical-offset="2329">
-              <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="729" max-vertical-offset="2261">
+              <caret line="140" column="5" selection-start-line="140" selection-start-column="5" selection-end-line="140" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/screens/activity/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9136808" vertical-offset="0" max-vertical-offset="901">
-              <caret line="44" column="40" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -801,11 +817,11 @@
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/src/com/example/Caldroid/MyApplication.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessAdapter.java" />
-        <option value="$PROJECT_DIR$/src/com/example/Caldroid/screens/activity/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java" />
-        <option value="$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/FragmentEndlesList.java" />
         <option value="$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessListView.java" />
+        <option value="$PROJECT_DIR$/src/com/example/Caldroid/screens/activity/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/FragmentEndlesList.java" />
+        <option value="$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessAdapter.java" />
       </list>
     </option>
   </component>
@@ -994,6 +1010,7 @@
     <property name="FullScreen" value="false" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
+    <property name="LayoutCode.rearrangeEntriesJava" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -1284,7 +1301,11 @@
       <created>1403212807210</created>
       <updated>1403212807210</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="- Fix">
+      <created>1403223969745</created>
+      <updated>1403223969745</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1391,7 +1412,8 @@
     <MESSAGE value="Calendar" />
     <MESSAGE value="- WeekDay" />
     <MESSAGE value="- EndLess" />
-    <option name="LAST_COMMIT_MESSAGE" value="- EndLess" />
+    <MESSAGE value="- Fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1403,7 +1425,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java</url>
-          <line>41</line>
+          <line>38</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
@@ -1439,55 +1461,55 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessListView.java</url>
-          <line>128</line>
+          <line>123</line>
           <properties />
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessListView.java</url>
-          <line>119</line>
+          <line>113</line>
           <properties />
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java</url>
-          <line>190</line>
+          <line>182</line>
           <properties />
           <option name="timeStamp" value="72" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java</url>
-          <line>159</line>
+          <line>151</line>
           <properties />
           <option name="timeStamp" value="73" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/FragmentEndlesList.java</url>
-          <line>136</line>
+          <line>121</line>
           <properties />
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/FragmentEndlesList.java</url>
-          <line>138</line>
+          <line>123</line>
           <properties />
           <option name="timeStamp" value="75" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java</url>
-          <line>183</line>
+          <line>175</line>
           <properties />
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java</url>
-          <line>163</line>
+          <line>155</line>
           <properties />
           <option name="timeStamp" value="77" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java</url>
-          <line>171</line>
+          <line>163</line>
           <properties />
           <option name="timeStamp" value="78" />
         </line-breakpoint>
@@ -1521,23 +1543,23 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="5406" max-vertical-offset="5814">
           <caret line="318" column="68" selection-start-line="318" selection-start-column="51" selection-end-line="318" selection-end-column="68" />
           <folding>
-            <element signature="e#2384#2385#0" expanded="true" />
-            <element signature="e#2422#2423#0" expanded="true" />
-            <element signature="e#2477#2478#0" expanded="true" />
-            <element signature="e#2522#2523#0" expanded="true" />
-            <element signature="e#2579#2580#0" expanded="true" />
-            <element signature="e#2635#2636#0" expanded="true" />
+            <element signature="e#2285#2286#0" expanded="true" />
+            <element signature="e#2323#2324#0" expanded="true" />
+            <element signature="e#2378#2379#0" expanded="true" />
+            <element signature="e#2423#2424#0" expanded="true" />
+            <element signature="e#2480#2481#0" expanded="true" />
+            <element signature="e#2536#2537#0" expanded="true" />
             <element signature="method#getView#0;class#EndlessAdapter#0" expanded="false" />
             <element signature="method#addToEndWithGlue#0;class#EndlessAdapter#0" expanded="false" />
             <element signature="method#addToStartWithGlue#0;class#EndlessAdapter#0" expanded="false" />
-            <element signature="e#15044#15045#0" expanded="true" />
-            <element signature="e#15084#15085#0" expanded="true" />
-            <element signature="e#15117#15118#0" expanded="true" />
-            <element signature="e#15151#15152#0" expanded="true" />
-            <element signature="e#15302#15303#0" expanded="true" />
-            <element signature="e#15337#15338#0" expanded="true" />
-            <element signature="e#15367#15368#0" expanded="true" />
-            <element signature="e#15443#15444#0" expanded="true" />
+            <element signature="e#14864#14865#0" expanded="true" />
+            <element signature="e#14904#14905#0" expanded="true" />
+            <element signature="e#14938#14939#0" expanded="true" />
+            <element signature="e#14974#14975#0" expanded="true" />
+            <element signature="e#15131#15132#0" expanded="true" />
+            <element signature="e#15166#15167#0" expanded="true" />
+            <element signature="e#15197#15198#0" expanded="true" />
+            <element signature="e#15276#15277#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1779,10 +1801,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java">
+    <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/Week.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3123" max-vertical-offset="3604">
-          <caret line="21" column="76" selection-start-line="21" selection-start-column="76" selection-end-line="21" selection-end-column="76" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3180873" vertical-offset="0" max-vertical-offset="481">
+          <caret line="9" column="36" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -1797,69 +1827,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/Week.java">
+    <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/screens/activity/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
-          <caret line="8" column="17" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1859" max-vertical-offset="2771">
-          <caret line="385" column="19" selection-start-line="385" selection-start-column="19" selection-end-line="385" selection-end-column="19" />
-          <folding>
-            <element signature="e#2384#2385#0" expanded="true" />
-            <element signature="e#2422#2423#0" expanded="true" />
-            <element signature="e#2477#2478#0" expanded="true" />
-            <element signature="e#2522#2523#0" expanded="true" />
-            <element signature="e#2579#2580#0" expanded="true" />
-            <element signature="e#2635#2636#0" expanded="true" />
-            <element signature="method#getView#0;class#EndlessAdapter#0" expanded="false" />
-            <element signature="method#addToEndWithGlue#0;class#EndlessAdapter#0" expanded="false" />
-            <element signature="method#addToStartWithGlue#0;class#EndlessAdapter#0" expanded="false" />
-            <element signature="e#15044#15045#0" expanded="true" />
-            <element signature="e#15084#15085#0" expanded="true" />
-            <element signature="e#15117#15118#0" expanded="true" />
-            <element signature="e#15151#15152#0" expanded="true" />
-            <element signature="e#15302#15303#0" expanded="true" />
-            <element signature="e#15337#15338#0" expanded="true" />
-            <element signature="e#15367#15368#0" expanded="true" />
-            <element signature="e#15443#15444#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3180873" vertical-offset="0" max-vertical-offset="481">
-          <caret line="9" column="36" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/FragmentEndlesList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1621" max-vertical-offset="2176">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessListView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1848" max-vertical-offset="2329">
-          <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1647" max-vertical-offset="2261">
+          <caret line="140" column="5" selection-start-line="140" selection-start-column="5" selection-end-line="140" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/screens/activity/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/dateHelper/CalendarGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9136808" vertical-offset="0" max-vertical-offset="901">
-          <caret line="44" column="40" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="49" max-vertical-offset="3621">
+          <caret line="19" column="75" selection-start-line="19" selection-start-column="75" selection-end-line="19" selection-end-column="75" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#593#599#0" expanded="true" />
+            <element signature="e#5132#5138#0" expanded="true" />
+            <element signature="e#6205#6211#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/FragmentEndlesList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="969" max-vertical-offset="2278">
+          <caret line="87" column="94" selection-start-line="87" selection-start-column="94" selection-end-line="87" selection-end-column="94" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/Caldroid/EndllesList/EndlessAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5221843" vertical-offset="408" max-vertical-offset="2669">
+          <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
+          <folding>
+            <element signature="e#2285#2286#0" expanded="true" />
+            <element signature="e#2323#2324#0" expanded="true" />
+            <element signature="e#2378#2379#0" expanded="true" />
+            <element signature="e#2423#2424#0" expanded="true" />
+            <element signature="e#2480#2481#0" expanded="true" />
+            <element signature="e#2536#2537#0" expanded="true" />
+            <element signature="method#getView#0;class#EndlessAdapter#0" expanded="false" />
+            <element signature="method#addToEndWithGlue#0;class#EndlessAdapter#0" expanded="false" />
+            <element signature="method#addToStartWithGlue#0;class#EndlessAdapter#0" expanded="false" />
+            <element signature="e#14864#14865#0" expanded="true" />
+            <element signature="e#14904#14905#0" expanded="true" />
+            <element signature="e#14938#14939#0" expanded="true" />
+            <element signature="e#14974#14975#0" expanded="true" />
+            <element signature="e#15131#15132#0" expanded="true" />
+            <element signature="e#15166#15167#0" expanded="true" />
+            <element signature="e#15197#15198#0" expanded="true" />
+            <element signature="e#15276#15277#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

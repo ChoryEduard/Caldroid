@@ -1,12 +1,8 @@
 package com.example.Caldroid.EndllesList;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
@@ -57,40 +53,38 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
                          int visibleItemCount, int totalItemCount) {
 
         if (getAdapter() == null)
-            return ;
+            return;
 
         if (getAdapter().getCount() == 0)
-            return ;
+            return;
 
         int l = visibleItemCount + firstVisibleItem;
 
         if (l >= totalItemCount &&
-                !((MyApplication)((MainActivity) ctx).getApplication()).isLoad) {
+                !((MyApplication) ((MainActivity) ctx).getApplication()).isLoad) {
             // It is time to add new data. We call the listener
             this.addFooterView(footer);
-            ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = true;
+            ((MyApplication) ((MainActivity) ctx).getApplication()).isLoad = true;
             listener.loadData(true);
-        }else if(firstVisibleItem == 0 &&
-                !((MyApplication)((MainActivity) ctx).getApplication()).isLoad){
+        } else if (firstVisibleItem == 0 &&
+                !((MyApplication) ((MainActivity) ctx).getApplication()).isLoad) {
 
             this.addHeaderView(footer);
-            ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = true;
+            ((MyApplication) ((MainActivity) ctx).getApplication()).isLoad = true;
             listener.loadData(false);
         }
 
-        if(!((MyApplication)((MainActivity) ctx).getApplication()).isLoad) {
-            ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = true;
+        if (!((MyApplication) ((MainActivity) ctx).getApplication()).isLoad) {
+            ((MyApplication) ((MainActivity) ctx).getApplication()).isLoad = true;
             adapter.setNextMonthToCurrent(firstVisibleItem, visibleItemCount);
 
         }
     }
 
 
-
-
-
     @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {}
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+    }
 
     public void setLoadingView(int resId) {
         LayoutInflater inflater = (LayoutInflater) super.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -118,9 +112,10 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
         adapter.addToEndWithGlue(data);
         adapter.notifyDataSetChanged();
 
-        ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = false;
+        ((MyApplication) ((MainActivity) ctx).getApplication()).isLoad = false;
 
     }
+
     public void addNewDataTop(List<Week> data) {
         this.removeHeaderView(footer);
         adapter.addToStartWithGlue(data);
@@ -132,7 +127,7 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
         adapter.notifyDataSetChanged();
 
         this.setSelectionFromTop(index, top);
-        ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = false;
+        ((MyApplication) ((MainActivity) ctx).getApplication()).isLoad = false;
 
     }
 
@@ -141,10 +136,7 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
     }
 
 
-
-
     public static interface EndlessListener {
-        public void loadData(boolean isDownScroll) ;
+        public void loadData(boolean isDownScroll);
     }
-
 }

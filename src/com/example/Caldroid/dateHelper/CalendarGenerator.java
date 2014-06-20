@@ -7,101 +7,99 @@ import android.util.Log;
 
 import com.example.Caldroid.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Random;
 
 /**
  * Created by BruSD on 6/12/2014.
  */
-public class CalendarGenerator  {
-    private static ArrayList<Day> currentCalendarList =  new ArrayList<Day>();
-    private static ArrayList<Day> previousCalendarList =  new ArrayList<Day>();
-    private static ArrayList<Day> nextCalendarList =  new ArrayList<Day>();
-    private static ArrayList<Week> currentCalendar =  new ArrayList<Week>();
-    private static Time currentMonth  =  new Time();
+public class CalendarGenerator {
+    private static ArrayList<Day> currentCalendarList = new ArrayList<Day>();
+    private static ArrayList<Day> previousCalendarList = new ArrayList<Day>();
+    private static ArrayList<Day> nextCalendarList = new ArrayList<Day>();
+    private static ArrayList<Week> currentCalendar = new ArrayList<Week>();
+    private static Time currentMonth = new Time();
 
     private static String TAG = "CC_MOB";
 
     private static String[] imageURLs;
 
 
-
-    public static ArrayList<Day> getCurrentMonthList(){
-        Time today =  new Time();
+    public static ArrayList<Day> getCurrentMonthList() {
+        Time today = new Time();
         currentCalendarList.clear();
         today = currentMonth;
-         int randomID =imageURLs.length;
-        Random random =  new Random();
-        int monthDay  = today.getActualMaximum(Time.MONTH_DAY);
+        int randomID = imageURLs.length;
+        Random random = new Random();
+        int monthDay = today.getActualMaximum(Time.MONTH_DAY);
         int month = today.month;
         int year = today.year;
 
-        for (int i = 1; i <= monthDay; i++){
+        for (int i = 1; i <= monthDay; i++) {
 
             today.set(i, month, year);
             Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)], true);
             day.getWeekDay();
-            String printString = String.valueOf(day.Day) +" "+String.valueOf(day.Month)+" "+String.valueOf(day.Year) + " "  + String.valueOf(day.getWeekDay());
-                    Log.v(TAG , printString );
+            String printString = String.valueOf(day.Day) + " " + String.valueOf(day.Month) + " " + String.valueOf(day.Year) + " " + String.valueOf(day.getWeekDay());
+            Log.v(TAG, printString);
 
             currentCalendarList.add(day);
         }
         return currentCalendarList;
     }
-    public static ArrayList<Day> getPreviousMonthList(){
-        Time today =  new Time();
+
+    public static ArrayList<Day> getPreviousMonthList() {
+        Time today = new Time();
         previousCalendarList.clear();
         today.set(currentMonth.monthDay, currentMonth.month, currentMonth.year);
-        int randomID =imageURLs.length;
-        Random random =  new Random();
+        int randomID = imageURLs.length;
+        Random random = new Random();
         int month;
         int year;
-        if (today.month == 0 ){
-             month = 11;
-             year = today.year - 1 ;
-        }else {
-             month = today.month - 1;
-             year = today.year;
+        if (today.month == 0) {
+            month = 11;
+            year = today.year - 1;
+        } else {
+            month = today.month - 1;
+            year = today.year;
         }
         today.set(1, month, year);
 
-        int monthDay  = today.getActualMaximum(Time.MONTH_DAY);
-        for (int i = 1; i <= monthDay; i++){
+        int monthDay = today.getActualMaximum(Time.MONTH_DAY);
+        for (int i = 1; i <= monthDay; i++) {
             today.set(i, month, year);
             Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)], false);
-            String printString = String.valueOf(day.Day) +" "+String.valueOf(day.Month)+" "+String.valueOf(day.Year) + day.imgURL;
-            Log.v(TAG , printString );
+            String printString = String.valueOf(day.Day) + " " + String.valueOf(day.Month) + " " + String.valueOf(day.Year) + day.imgURL;
+            Log.v(TAG, printString);
             previousCalendarList.add(day);
         }
         return previousCalendarList;
     }
 
-    public static ArrayList<Day> getNextMonthList(){
-        Time today =  new Time();
+    public static ArrayList<Day> getNextMonthList() {
+        Time today = new Time();
         nextCalendarList.clear();
         today.set(currentMonth.monthDay, currentMonth.month, currentMonth.year);
-        int randomID =imageURLs.length;
-        Random random =  new Random();
+        int randomID = imageURLs.length;
+        Random random = new Random();
 
         int month;
         int year;
-        if (today.month == 11 ){
+        if (today.month == 11) {
             month = 0;
-            year = today.year + 1 ;
-        }else {
-            month = today.month+ 1;
+            year = today.year + 1;
+        } else {
+            month = today.month + 1;
             year = today.year;
         }
         today.set(1, month, year);
 
-        int monthDay  = today.getActualMaximum(Time.MONTH_DAY);
-        for (int i = 1; i <= monthDay; i++){
+        int monthDay = today.getActualMaximum(Time.MONTH_DAY);
+        for (int i = 1; i <= monthDay; i++) {
             today.set(i, month, year);
             Day day = new Day(today.toMillis(false), imageURLs[random.nextInt(randomID)], false);
-            String printString = String.valueOf(day.Day) +" "+String.valueOf(day.Month)+" "+String.valueOf(day.Year) + day.imgURL;
-            Log.v(TAG , printString );
+            String printString = String.valueOf(day.Day) + " " + String.valueOf(day.Month) + " " + String.valueOf(day.Year) + day.imgURL;
+            Log.v(TAG, printString);
             nextCalendarList.add(day);
         }
 
@@ -109,19 +107,15 @@ public class CalendarGenerator  {
     }
 
 
-    public static void toCurrentMonth(Context context){
-        imageURLs =  context.getResources().getStringArray(R.array.image_url);
+    public static void toCurrentMonth(Context context) {
+        imageURLs = context.getResources().getStringArray(R.array.image_url);
         currentMonth.setToNow();
 
     }
 
 
-
-
-
-
-    public static ArrayList<Week> getInitData(){
-        ArrayList<Day> tempList =  new ArrayList<Day>();
+    public static ArrayList<Week> getInitData() {
+        ArrayList<Day> tempList = new ArrayList<Day>();
         currentCalendar.clear();
 
         tempList = getPreviousMonthList();
@@ -129,23 +123,21 @@ public class CalendarGenerator  {
         tempList.addAll(getNextMonthList());
 
 
-
-
-        for (int i = 0 ; i < tempList.size(); ){
-            Week week =  new Week();
+        for (int i = 0; i < tempList.size(); ) {
+            Week week = new Week();
             int fierstDay = tempList.get(i).getWeekDay();
-            int indexLost = i+(6-fierstDay);
+            int indexLost = i + (6 - fierstDay);
             int lastDay;
-            if(indexLost <= tempList.size()-1){
+            if (indexLost <= tempList.size() - 1) {
                 lastDay = 6;
-            }else {
-                lastDay = tempList.get(tempList.size()-1).getWeekDay();
+            } else {
+                lastDay = tempList.get(tempList.size() - 1).getWeekDay();
             }
-            for (int j = 0; j <= 6;  j++){
-                if(j >= fierstDay && j <= lastDay){
+            for (int j = 0; j <= 6; j++) {
+                if (j >= fierstDay && j <= lastDay) {
                     week.add(j, tempList.get(i));
                     i++;
-                } else{
+                } else {
                     week.add(j, null);
                 }
             }
@@ -154,28 +146,28 @@ public class CalendarGenerator  {
         return currentCalendar;
     }
 
-    public static ArrayList<Week> getNextWeekMonthList(int month, int year){
-        ArrayList<Day> tempList =  new ArrayList<Day>();
+    public static ArrayList<Week> getNextWeekMonthList(int month, int year) {
+        ArrayList<Day> tempList = new ArrayList<Day>();
         ArrayList<Week> result = new ArrayList<Week>();
         currentMonth.set(1, month, year);
         Log.v("BrusD", "Generator Current Month" + month);
         tempList = getNextMonthList();
 
-        for (int i = 0 ; i < tempList.size(); ){
-            Week week =  new Week();
+        for (int i = 0; i < tempList.size(); ) {
+            Week week = new Week();
             int firstDay = tempList.get(i).getWeekDay();
-            int indexLost = i+(6-firstDay);
+            int indexLost = i + (6 - firstDay);
             int lastDay;
-            if(indexLost <= tempList.size()-1){
+            if (indexLost <= tempList.size() - 1) {
                 lastDay = 6;
-            }else {
-                lastDay = tempList.get(tempList.size()-1).getWeekDay();
+            } else {
+                lastDay = tempList.get(tempList.size() - 1).getWeekDay();
             }
-            for (int j = 0; j <= 6;  j++){
-                if(j >= firstDay && j <= lastDay){
+            for (int j = 0; j <= 6; j++) {
+                if (j >= firstDay && j <= lastDay) {
                     week.add(j, tempList.get(i));
                     i++;
-                } else{
+                } else {
                     week.add(j, null);
                 }
             }
@@ -190,21 +182,21 @@ public class CalendarGenerator  {
 
         currentMonth.set(1, month, year);
         tempList = getPreviousMonthList();
-        for (int i = 0 ; i < tempList.size(); ){
-            Week week =  new Week();
+        for (int i = 0; i < tempList.size(); ) {
+            Week week = new Week();
             int fierstDay = tempList.get(i).getWeekDay();
-            int indexLost = i+(6-fierstDay);
+            int indexLost = i + (6 - fierstDay);
             int lastDay;
-            if(indexLost <= tempList.size()-1){
+            if (indexLost <= tempList.size() - 1) {
                 lastDay = 6;
-            }else {
-                lastDay = tempList.get(tempList.size()-1).getWeekDay();
+            } else {
+                lastDay = tempList.get(tempList.size() - 1).getWeekDay();
             }
-            for (int j = 0; j <= 6;  j++){
-                if(j >= fierstDay && j <= lastDay){
+            for (int j = 0; j <= 6; j++) {
+                if (j >= fierstDay && j <= lastDay) {
                     week.add(j, tempList.get(i));
                     i++;
-                } else{
+                } else {
                     week.add(j, null);
                 }
             }

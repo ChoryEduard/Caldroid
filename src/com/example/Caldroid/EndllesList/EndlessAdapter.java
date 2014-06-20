@@ -27,14 +27,12 @@ import java.util.List;
 /**
  * Created by BruSD on 6/18/2014.
  */
-public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickListener{
+public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickListener {
 
+    int year;
     private ArrayList<Week> itemList;
     private Context ctx;
     private int cellWeith;
-    private int mCurrentMonth;
-    private String mCurrentMonthName;
-    private int mCurrentYear;
     Transformation transformation = new Transformation() {
         @Override
         public Bitmap transform(Bitmap source) {
@@ -54,9 +52,9 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
             return "transformation" + " desiredWidth";
         }
     };
-    //private int currentMonth;
-    //private int currentYear;
-
+    private int mCurrentMonth;
+    private String mCurrentMonthName;
+    public int mCurrentYear;
 
     public EndlessAdapter(Context ctx, ArrayList<Week> itemList, int layoutId, int cellWeith) {
         super(ctx, layoutId, itemList);
@@ -66,10 +64,8 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
         if (itemList.size() > 0) {
             mCurrentMonth = itemList.get(0).get(6).Month;
             mCurrentYear = itemList.get(0).get(6).Year;
+            mCurrentMonthName = itemList.get(8).get(6).getMonthName();
         }
-
-        // this.currentMonth = itemList.get(7).get(0).Month;
-        //this.currentYear = itemList.get(7).get(0).Year;
     }
 
     @Override
@@ -104,13 +100,13 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
             holder.friDay = (RelativeLayout) convertView.findViewById(R.id.rel5);
             holder.saturDay = (RelativeLayout) convertView.findViewById(R.id.rel6);
 
-            holder.sunDay .setOnClickListener(this);
-            holder.monDay .setOnClickListener(this);
+            holder.sunDay.setOnClickListener(this);
+            holder.monDay.setOnClickListener(this);
             holder.tuesDay.setOnClickListener(this);
             holder.wednesDay.setOnClickListener(this);
-            holder.thursDay .setOnClickListener(this);
-            holder.friDay .setOnClickListener(this);
-            holder.saturDay .setOnClickListener(this);
+            holder.thursDay.setOnClickListener(this);
+            holder.friDay.setOnClickListener(this);
+            holder.saturDay.setOnClickListener(this);
 
 
             holder.sunDay.getLayoutParams().height = cellWeith;
@@ -165,7 +161,7 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
         if (week.get(0) != null) {
             day = week.get(0);
             holder.sunDayText.setText(String.valueOf(day.Day));
-            holder.sunDay .setTag(day.Day + "_" + day.Month + "_" + day.Year);
+            holder.sunDay.setTag(day.Day + "_" + day.Month + "_" + day.Year);
             Picasso.with(ctx)
                     .load(day.imgURL)
                     .error(android.R.drawable.stat_notify_error)
@@ -182,7 +178,7 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
         if (week.get(1) != null) {
             day = week.get(1);
             holder.monDayText.setText(String.valueOf(day.Day));
-            holder.monDay .setTag(day.Day + "_" + day.Month + "_" + day.Year);
+            holder.monDay.setTag(day.Day + "_" + day.Month + "_" + day.Year);
             Picasso.with(ctx)
                     .load(day.imgURL)
                     .error(android.R.drawable.stat_notify_error)
@@ -198,7 +194,7 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
         if (week.get(2) != null) {
             day = week.get(2);
             holder.tuesDayText.setText(String.valueOf(day.Day));
-            holder.tuesDay .setTag(day.Day + "_" + day.Month + "_" + day.Year);
+            holder.tuesDay.setTag(day.Day + "_" + day.Month + "_" + day.Year);
             Picasso.with(ctx)
                     .load(day.imgURL)
                     .error(android.R.drawable.stat_notify_error)
@@ -214,7 +210,7 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
         if (week.get(3) != null) {
             day = week.get(3);
             holder.wednesDayText.setText(String.valueOf(day.Day));
-            holder.wednesDay .setTag(day.Day + "_" + day.Month + "_" + day.Year);
+            holder.wednesDay.setTag(day.Day + "_" + day.Month + "_" + day.Year);
             Picasso.with(ctx)
                     .load(day.imgURL)
                     .error(android.R.drawable.stat_notify_error)
@@ -230,7 +226,7 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
         if (week.get(4) != null) {
             day = week.get(4);
             holder.thursDayText.setText(String.valueOf(day.Day));
-            holder.thursDay .setTag(day.Day + "_" + day.Month + "_" + day.Year);
+            holder.thursDay.setTag(day.Day + "_" + day.Month + "_" + day.Year);
             Picasso.with(ctx)
                     .load(day.imgURL)
                     .error(android.R.drawable.stat_notify_error)
@@ -246,7 +242,7 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
         if (week.get(5) != null) {
             day = week.get(5);
             holder.friDayText.setText(String.valueOf(day.Day));
-            holder.friDay .setTag(day.Day + "_" + day.Month + "_" + day.Year);
+            holder.friDay.setTag(day.Day + "_" + day.Month + "_" + day.Year);
             Picasso.with(ctx)
                     .load(day.imgURL)
                     .error(android.R.drawable.stat_notify_error)
@@ -262,7 +258,7 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
         if (week.get(6) != null) {
             day = week.get(6);
             holder.saturDayText.setText(String.valueOf(day.Day));
-            holder.saturDay .setTag(day.Day + "_" + day.Month + "_" + day.Year);
+            holder.saturDay.setTag(day.Day + "_" + day.Month + "_" + day.Year);
             Picasso.with(ctx)
                     .load(day.imgURL)
                     .error(android.R.drawable.stat_notify_error)
@@ -327,10 +323,9 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
         }
     }
 
-    int year;
     public void setNextMonthToCurrent(final int firstItem, final int count) {
         if (itemList.get(firstItem).get(6) == null) {
-            ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = false;
+            ((MyApplication) ((MainActivity) ctx).getApplication()).isLoad = false;
             return;
 
         }
@@ -344,59 +339,58 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
                 protected void onPostExecute(Void aVoid) {
                     super.onPostExecute(aVoid);
                     notifyDataSetChanged();
-                    ((TextView)(((MainActivity)ctx).findViewById(R.id.tv_current_month))).setText(getmCurrentMonthName()+ " "+ year);
-                    ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = false;
+                    ((TextView) (((MainActivity) ctx).findViewById(R.id.tv_current_month))).setText(getmCurrentMonthName() + " " + year);
+                    ((MyApplication) ((MainActivity) ctx).getApplication()).isLoad = false;
                 }
 
                 @Override
                 protected Void doInBackground(Void... params) {
                     for (int weeksId = firstItem; weeksId <= firstItem + count - 1; weeksId++) {
-                        if(itemList.size() == weeksId)
+                        if (itemList.size() == weeksId)
                             return null;
-                            for (Day day : itemList.get(weeksId)) {
-                                if (day != null) {
-                                    int visibleMonth = itemMonth + 1;
-                                    if (itemMonth == 11)
-                                        visibleMonth = 0;
+                        for (Day day : itemList.get(weeksId)) {
+                            if (day != null) {
+                                int visibleMonth = itemMonth + 1;
+                                if (itemMonth == 11)
+                                    visibleMonth = 0;
 
-                                    if (day.Month != visibleMonth) {
-                                        day.setIsCorrentMonthDay(false);
-                                    } else {
-                                        day.setIsCorrentMonthDay(true);
-                                        year = day.Year;
-                                        mCurrentMonthName = day.getMonthName();
-                                    }
+                                if (day.Month != visibleMonth) {
+                                    day.setIsCorrentMonthDay(false);
+                                } else {
+                                    day.setIsCorrentMonthDay(true);
+                                    year = day.Year;
+                                    mCurrentMonthName = day.getMonthName();
                                 }
                             }
+                        }
 
                     }
                     mCurrentMonth = itemMonth;
                     return null;
                 }
             }.execute();
-        }
-        else
-            ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = false;
+        } else
+            ((MyApplication) ((MainActivity) ctx).getApplication()).isLoad = false;
     }
 
-    public String getmCurrentMonthName(){
+    public String getmCurrentMonthName() {
         return mCurrentMonthName;
     }
 
-    public int getPrevtMonth(){
-      return mCurrentMonth;
+    public int getPrevtMonth() {
+        return mCurrentMonth;
     }
 
-    public int getpNexttMonth(){
-        return mCurrentMonth +2 > 11? mCurrentMonth + 2 - 12:mCurrentMonth + 2;
+    public int getpNexttMonth() {
+        return mCurrentMonth + 2 > 11 ? mCurrentMonth + 2 - 12 : mCurrentMonth + 2;
     }
 
-    public int getPrevYear(){
+    public int getPrevYear() {
         return mCurrentYear;
     }
 
-    public int getNexYear(){
-        return mCurrentMonth +2 > 11? mCurrentYear + 1 :mCurrentYear;
+    public int getNexYear() {
+        return mCurrentMonth + 2 > 11 ? mCurrentYear + 1 : mCurrentYear;
     }
 
 

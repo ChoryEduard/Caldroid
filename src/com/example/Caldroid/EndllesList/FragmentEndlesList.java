@@ -27,12 +27,11 @@ import java.util.List;
 public class FragmentEndlesList extends Fragment implements EndlessListView.EndlessListener {
 
 
-    private  EndlessListView lv;
+    int mult = 1;
+    private EndlessListView lv;
     private View vi;
     private Activity mActivity;
     private EndlessAdapter adp;
-    int mult = 1;
-
     private boolean isDawnScroll;
 
 
@@ -46,12 +45,14 @@ public class FragmentEndlesList extends Fragment implements EndlessListView.Endl
         columnWidth = point.x;
         return columnWidth;
     }
+
     @Override
     public final void onAttach(Activity _activity) {
         super.onAttach(_activity);
         mActivity = _activity;
         ((MainActivity) mActivity).setCustomActionBar(initializeActionBar());
     }
+
     private final View initializeActionBar() {
         LayoutInflater inflater = (LayoutInflater) mActivity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -69,18 +70,26 @@ public class FragmentEndlesList extends Fragment implements EndlessListView.Endl
         });
         return v;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        vi = inflater.inflate(R.layout.fragment_endlase_list,container, false);
-        lv = (EndlessListView)vi.findViewById(R.id.el);
+        vi = inflater.inflate(R.layout.fragment_endlase_list, container, false);
+        lv = (EndlessListView) vi.findViewById(R.id.el);
         lv.setFastScrollEnabled(false);
 
         loadDefaultList();
 
         return vi;
     }
-    private void loadDefaultList(){
-        adp = new EndlessAdapter(mActivity, initFirstList(), R.layout.row_layout, getScreenWidth()/7);
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((TextView) ((mActivity).findViewById(R.id.tv_current_month))).setText(adp.getmCurrentMonthName() + " " + adp.mCurrentYear);
+    }
+
+    private void loadDefaultList() {
+        adp = new EndlessAdapter(mActivity, initFirstList(), R.layout.row_layout, getScreenWidth() / 7);
         lv.setLoadingView(R.layout.loading_layout);
         lv.setAdapter(adp);
         lv.setSelectionFromTop(2, 0);
@@ -95,6 +104,7 @@ public class FragmentEndlesList extends Fragment implements EndlessListView.Endl
         result = CalendarGenerator.getInitData();
         return result;
     }
+
     @Override
     public void loadData(boolean isDownScroll) {
         isDawnScroll = isDownScroll;
@@ -105,6 +115,16 @@ public class FragmentEndlesList extends Fragment implements EndlessListView.Endl
         fl.execute(new String[]{});
     }
 
+    private ArrayList<Week> extendList() {
+
+        ArrayList<Week> result;
+        if (isDawnScroll) {
+            result = CalendarGenerator.getNextWeekMonthList(adp.getpNexttMonth(), adp.getNexYear());
+        } else {
+            result = CalendarGenerator.getPrevWeekMonthList(adp.getPrevtMonth(), adp.getPrevYear());
+        }
+        return result;
+    }
 
     private class AddMonthTask extends AsyncTask<String, Void, List<Week>> {
 
@@ -121,27 +141,13 @@ public class FragmentEndlesList extends Fragment implements EndlessListView.Endl
         @Override
         protected void onPostExecute(List<Week> result) {
             super.onPostExecute(result);
-            if(isDawnScroll){
+            if (isDawnScroll) {
                 lv.addNewDataBottom(result);
-            }else {
+            } else {
                 lv.addNewDataTop(result);
             }
         }
     }
-
-
-    private ArrayList<Week> extendList() {
-
-        ArrayList<Week> result;
-        if(isDawnScroll){
-            result = CalendarGenerator.getNextWeekMonthList(adp.getpNexttMonth(), adp.getNexYear());
-        }else {
-            result = CalendarGenerator.getPrevWeekMonthList(adp.getPrevtMonth(), adp.getPrevYear());
-        }
-        return result;
-    }
-
-
 
 
 }
