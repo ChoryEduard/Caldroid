@@ -1,5 +1,6 @@
 package com.example.Caldroid.EndllesList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -10,35 +11,40 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import com.example.Caldroid.MyApplication;
 import com.example.Caldroid.dateHelper.Week;
+import com.example.Caldroid.screens.activity.MainActivity;
 
 import java.util.List;
 
 /**
  * Created by BruSD on 6/18/2014.
  */
-public class EndlessListView extends ListView implements AbsListView.OnScrollListener, GestureDetector.OnGestureListener {
+public class EndlessListView extends ListView implements AbsListView.OnScrollListener {
 
     private View footer;
-    private boolean isLoading;
-    private boolean isUpdating;
     private EndlessListener listener;
     private EndlessAdapter adapter;
     private int oldVisebleItem;
+    private Context ctx;
 
     public EndlessListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         this.setOnScrollListener(this);
+        ctx = context;
+
     }
 
     public EndlessListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.setOnScrollListener(this);
+        ctx = context;
     }
 
     public EndlessListView(Context context) {
         super(context);
         this.setOnScrollListener(this);
+        ctx = context;
     }
 
     public void setListener(EndlessListener listener) {
@@ -57,41 +63,31 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
             return ;
 
         int l = visibleItemCount + firstVisibleItem;
-        adapter.setNextMonthToCurrent(firstVisibleItem, visibleItemCount);
 
-        if (l >= totalItemCount && !isLoading) {
+        if (l >= totalItemCount &&
+                !((MyApplication)((MainActivity) ctx).getApplication()).isLoad) {
             // It is time to add new data. We call the listener
             this.addFooterView(footer);
-            isLoading = true;
+            ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = true;
             listener.loadData(true);
-        }else if(firstVisibleItem == 0 && !isLoading){
+        }else if(firstVisibleItem == 0 &&
+                !((MyApplication)((MainActivity) ctx).getApplication()).isLoad){
 
             this.addHeaderView(footer);
-            isLoading = true;
+            ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = true;
             listener.loadData(false);
         }
 
-        if(oldVisebleItem < firstVisibleItem && !isUpdating ){
-            isUpdating = true;
-            int lastItem = this.getLastVisiblePosition() -1 ;
-            scrolledDown(lastItem );
-        }else if(oldVisebleItem > firstVisibleItem && !isUpdating ){
-            scrolledUp();
-            isUpdating = true;
+        if(!((MyApplication)((MainActivity) ctx).getApplication()).isLoad) {
+            ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = true;
+            adapter.setNextMonthToCurrent(firstVisibleItem, visibleItemCount);
+
         }
     }
 
 
 
-    private void scrolledDown(int last){
-        Log.v("Position", "scrolledDown");
-//        adapter.setNextMonthToCurrent(last);
-        isUpdating = false;
-    }
-    private void scrolledUp(){
-        Log.v("Position", "ScroolUp");
-        isUpdating = false;
-    }
+
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {}
@@ -122,7 +118,8 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
         adapter.addToEndWithGlue(data);
         adapter.notifyDataSetChanged();
 
-        isLoading = false;
+        ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = false;
+
     }
     public void addNewDataTop(List<Week> data) {
         this.removeHeaderView(footer);
@@ -135,44 +132,15 @@ public class EndlessListView extends ListView implements AbsListView.OnScrollLis
         adapter.notifyDataSetChanged();
 
         this.setSelectionFromTop(index, top);
-        isLoading = false;
+        ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = false;
+
     }
 
     public EndlessListener setListener() {
         return listener;
     }
 
-    @Override
-    public boolean onDown(MotionEvent e) {
-        return false;
-    }
 
-    @Override
-    public void onShowPress(MotionEvent e) {
-
-    }
-
-    @Override
-    public boolean onSingleTapUp(MotionEvent e) {
-        return false;
-    }
-
-    @Override
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        return false;
-    }
-
-    @Override
-    public void onLongPress(MotionEvent e) {
-
-    }
-
-    @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        velocityY = velocityY/2;
-        velocityX = velocityX/2;
-        return true;
-    }
 
 
     public static interface EndlessListener {

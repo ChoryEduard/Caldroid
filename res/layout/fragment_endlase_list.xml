@@ -5,7 +5,6 @@
     tools:context=".MainActivity" >
 
 
-
     <com.example.Caldroid.EndllesList.EndlessListView
         android:id="@+id/el"
         android:layout_width="match_parent"

@@ -13,9 +13,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.Caldroid.MyApplication;
 import com.example.Caldroid.R;
 import com.example.Caldroid.dateHelper.Day;
 import com.example.Caldroid.dateHelper.Week;
+import com.example.Caldroid.screens.activity.MainActivity;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -31,6 +33,8 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
     private Context ctx;
     private int cellWeith;
     private int mCurrentMonth;
+    private String mCurrentMonthName;
+    private int mCurrentYear;
     Transformation transformation = new Transformation() {
         @Override
         public Bitmap transform(Bitmap source) {
@@ -59,8 +63,11 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
         this.itemList = itemList;
         this.ctx = ctx;
         this.cellWeith = cellWeith;
-        if (itemList.size() > 0)
+        if (itemList.size() > 0) {
             mCurrentMonth = itemList.get(0).get(6).Month;
+            mCurrentYear = itemList.get(0).get(6).Year;
+        }
+
         // this.currentMonth = itemList.get(7).get(0).Month;
         //this.currentYear = itemList.get(7).get(0).Year;
     }
@@ -320,43 +327,78 @@ public class EndlessAdapter extends ArrayAdapter<Week> implements View.OnClickLi
         }
     }
 
+    int year;
     public void setNextMonthToCurrent(final int firstItem, final int count) {
-        if (itemList.get(firstItem).get(6) == null)
+        if (itemList.get(firstItem).get(6) == null) {
+            ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = false;
             return;
+
+        }
         final int itemMonth = itemList.get(firstItem).get(6).Month;
+        mCurrentYear = itemList.get(firstItem).get(6).Year;
         Log.v("cs_cs", "mCurrentMonth: " + mCurrentMonth + " ; item month: " + itemMonth);
         if (mCurrentMonth != itemMonth) {
+
             new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected void onPostExecute(Void aVoid) {
                     super.onPostExecute(aVoid);
                     notifyDataSetChanged();
+                    ((TextView)(((MainActivity)ctx).findViewById(R.id.tv_current_month))).setText(getmCurrentMonthName()+ " "+ year);
+                    ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = false;
                 }
 
                 @Override
                 protected Void doInBackground(Void... params) {
                     for (int weeksId = firstItem; weeksId <= firstItem + count - 1; weeksId++) {
-                        for (Day day : itemList.get(weeksId)) {
-                            if (day != null) {
-                                int visibleMonth = itemMonth + 1;
-                                if (itemMonth == 11)
-                                    visibleMonth = 0;
+                        if(itemList.size() == weeksId)
+                            return null;
+                            for (Day day : itemList.get(weeksId)) {
+                                if (day != null) {
+                                    int visibleMonth = itemMonth + 1;
+                                    if (itemMonth == 11)
+                                        visibleMonth = 0;
 
-                                if (day.Month != visibleMonth) {
-                                    day.setIsCorrentMonthDay(false);
-                                } else {
-                                    day.setIsCorrentMonthDay(true);
+                                    if (day.Month != visibleMonth) {
+                                        day.setIsCorrentMonthDay(false);
+                                    } else {
+                                        day.setIsCorrentMonthDay(true);
+                                        year = day.Year;
+                                        mCurrentMonthName = day.getMonthName();
+                                    }
                                 }
                             }
-                        }
+
                     }
                     mCurrentMonth = itemMonth;
-
                     return null;
                 }
             }.execute();
         }
+        else
+            ((MyApplication)((MainActivity) ctx).getApplication()).isLoad = false;
     }
+
+    public String getmCurrentMonthName(){
+        return mCurrentMonthName;
+    }
+
+    public int getPrevtMonth(){
+      return mCurrentMonth;
+    }
+
+    public int getpNexttMonth(){
+        return mCurrentMonth +2 > 11? mCurrentMonth + 2 - 12:mCurrentMonth + 2;
+    }
+
+    public int getPrevYear(){
+        return mCurrentYear;
+    }
+
+    public int getNexYear(){
+        return mCurrentMonth +2 > 11? mCurrentYear + 1 :mCurrentYear;
+    }
+
 
     @Override
     public void onClick(View v) {

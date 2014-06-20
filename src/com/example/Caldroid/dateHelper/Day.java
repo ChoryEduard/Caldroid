@@ -1,18 +1,25 @@
 package com.example.Caldroid.dateHelper;
 
 import android.text.format.Time;
+import android.util.Log;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Created by BruSD on 6/12/2014.
  */
 public class Day {
     private static Time date = new Time();;
+
     public String imgURL;
     public int Day;
     public int Month; // 0-11
     public int Year;
+
     private int dayOfWeek;
     private boolean isCurrentMonthDay;
+    private String monthName;
 
     public Day(long dateInMilliseconds , String imgURL, boolean isCurrMonthDay){
         this.date.set(dateInMilliseconds);
@@ -23,6 +30,11 @@ public class Day {
         this.Year = date.year;
         this.dayOfWeek = date.weekDay;
         this.isCurrentMonthDay = isCurrMonthDay;
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(dateInMilliseconds);
+        monthName = new SimpleDateFormat("MMM").format(cal.getTime());
+
     }
 
     public int getWeekDay(){
@@ -36,5 +48,7 @@ public class Day {
         isCurrentMonthDay = isCurrent;
     }
 
-
+    public String getMonthName(){
+        return monthName;
+    }
 }

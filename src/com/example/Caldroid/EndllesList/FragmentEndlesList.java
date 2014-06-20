@@ -26,10 +26,11 @@ import java.util.List;
  */
 public class FragmentEndlesList extends Fragment implements EndlessListView.EndlessListener {
 
-    private final static int ITEM_PER_REQUEST = 50;
+
     private  EndlessListView lv;
     private View vi;
     private Activity mActivity;
+    private EndlessAdapter adp;
     int mult = 1;
 
     private boolean isDawnScroll;
@@ -79,7 +80,7 @@ public class FragmentEndlesList extends Fragment implements EndlessListView.Endl
         return vi;
     }
     private void loadDefaultList(){
-        EndlessAdapter adp = new EndlessAdapter(mActivity, initFirstList(), R.layout.row_layout, getScreenWidth()/7);
+        adp = new EndlessAdapter(mActivity, initFirstList(), R.layout.row_layout, getScreenWidth()/7);
         lv.setLoadingView(R.layout.loading_layout);
         lv.setAdapter(adp);
         lv.setSelectionFromTop(2, 0);
@@ -100,12 +101,12 @@ public class FragmentEndlesList extends Fragment implements EndlessListView.Endl
         System.out.println("Load data");
         mult += 10;
         // We load more data here
-        FakeNetLoader fl = new FakeNetLoader();
+        AddMonthTask fl = new AddMonthTask();
         fl.execute(new String[]{});
     }
 
 
-    private class FakeNetLoader extends AsyncTask<String, Void, List<Week>> {
+    private class AddMonthTask extends AsyncTask<String, Void, List<Week>> {
 
         @Override
         protected List<Week> doInBackground(String... params) {
@@ -133,9 +134,9 @@ public class FragmentEndlesList extends Fragment implements EndlessListView.Endl
 
         ArrayList<Week> result;
         if(isDawnScroll){
-            result = CalendarGenerator.getNextWeekMonthList();
+            result = CalendarGenerator.getNextWeekMonthList(adp.getpNexttMonth(), adp.getNexYear());
         }else {
-            result = CalendarGenerator.getPrevWeekMonthList();
+            result = CalendarGenerator.getPrevWeekMonthList(adp.getPrevtMonth(), adp.getPrevYear());
         }
         return result;
     }

@@ -38,16 +38,6 @@ public final class MainActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-//        CalendarGenerator.toCurrentMonth(this);
-//        CalendarGenerator.getWeekBeforThisDay( CalendarGenerator.getPreviousMonthList().get(0));
-//        CalendarGenerator.toPreviousMonth();
-//        CalendarGenerator.getWeekBeforThisDay( CalendarGenerator.getPreviousMonthList().get(0));
-//        CalendarGenerator.getPreviousMonthList();
-//        CalendarGenerator.getCurentMonthList();
-//        CalendarGenerator.getNextMonthList();
-
-
-
     }
 
 
